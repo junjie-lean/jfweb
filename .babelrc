@@ -1,0 +1,42 @@
+{
+  "presets": [
+    ["react-app"],
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "ie": "10",
+          "chrome": "57"
+        },
+        "useBuiltIns": "entry",
+        "spec": true
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime"],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      },
+      "antd"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "lodash",
+        "libraryDirectory": "lodashs",
+        "camel2DashComponentName": false
+      },
+      "lodash"
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ]
+  ]
+}
