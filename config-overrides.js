@@ -2,22 +2,26 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-15 13:45:41
+ * @Last Modified time: 2019-04-15 15:54:53
  */
 
 /**
- * @description for overrides the global config
+ * @description webpack配置override
  */
 
-// const { injectBabelPlugin } = require("react-app-rewired");
 const {
   override,
   disableEsLint,
   useBabelRc,
-  overrideDevServer
+  fixBabelImports
 } = require("customize-cra");
 
-module.exports = {
-  webpack: override(disableEsLint(), useBabelRc()),
-  devServer: overrideDevServer()
-};
+module.exports = override(
+  disableEsLint(),
+  useBabelRc(),
+  fixBabelImports("import", {
+    libraryName: "antd",
+    libraryDirectory: "es",
+    style: "css"
+  })
+);
