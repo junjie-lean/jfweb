@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 20:03:42
+ * @Last Modified time: 2019-04-16 21:08:27
  */
 
 /**
@@ -11,9 +11,7 @@
  * @description 手动调用react-app-rewired的方法
  */
 
-// const execa = require("execa");
 const spawn = require("cross-spawn");
-// const { spawn } = require("child_process");
 process.on("unhandledRejection", err => {
   throw err;
 });

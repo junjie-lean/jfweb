@@ -1,18 +1,5 @@
 {
-  "presets": [
-    ["react-app"],
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "ie": "10",
-          "chrome": "57"
-        },
-        "useBuiltIns": "entry",
-        "spec": true
-      }
-    ]
-  ],
+  "presets": [["react-app"], ["@babel/preset-env"]],
   "plugins": [
     ["@babel/plugin-transform-runtime"],
     [
