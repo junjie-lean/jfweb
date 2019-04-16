@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:53:28
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 10:40:39
+ * @Last Modified time: 2019-04-16 10:54:51
  */
 
 /**
@@ -24,7 +24,7 @@ export default class RouterRelation extends React.Component {
     return (
       <Router basename="/">
         <Switch>
-          <Route path="/" />
+          <Route exact path="/" />
           <Route path="/loading" component={Loading} />
           <Redirect to="/" />
         </Switch>
