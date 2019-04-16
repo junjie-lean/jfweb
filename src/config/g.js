@@ -1,10 +1,8 @@
-import { create } from "domain";
-
 /*
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:54:03
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-15 18:17:57
+ * @Last Modified time: 2019-04-16 09:25:17
  */
 
 /**
@@ -14,10 +12,9 @@ import { create } from "domain";
 let isDev = process.env.NODE_ENV === "development" ? true : false;
 
 function createGlobalConfig(isDev) {
-
-    return {
-
-    }
+  var a = 1,
+    b = 2;
+  return a, b;
 }
 
 let g = createGlobalConfig(isDev);
