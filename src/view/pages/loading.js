@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 12:54:35
+ * @Last Modified time: 2019-04-17 09:58:26
  */
 
 /**
@@ -17,8 +17,12 @@ export default class Loading extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount(){
-    console.log(this.props)
+  componentDidMount() {
+    let _this = this;
+    console.log(this.props);
+    setTimeout(() => {
+      _this.props.history.push('/home')
+    }, 5000);
   }
   render() {
     let types = [

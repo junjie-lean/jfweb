@@ -10,6 +10,7 @@
     "babel-plugin-import": "^1.11.0",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.11",
+    "node-sass": "^4.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-loading": "^2.0.3",
