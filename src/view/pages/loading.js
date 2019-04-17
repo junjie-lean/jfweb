@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 15:12:04
+ * @Last Modified time: 2019-04-17 17:46:41
  */
 
 /**
@@ -12,7 +12,7 @@
 import React from "react";
 import ReactLoding from "react-loading";
 import G from "./../../config/g";
-
+import u from "./../../util/_util";
 
 export default class Loading extends React.Component {
   constructor(props) {
@@ -21,10 +21,10 @@ export default class Loading extends React.Component {
   }
   componentDidMount() {
     let _this = this;
-    console.log(this.props);
+    let rt = JSON.parse(u.getQueryString("rt").slice(1, -1));
     setTimeout(() => {
-      _this.props.history.push('/home')
-    }, 5000);
+      _this.props.history.push(rt.p);
+    }, 3000);
   }
   render() {
     let types = [
