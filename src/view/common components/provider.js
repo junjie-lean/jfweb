@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 21:07:23
+ * @Last Modified time: 2019-04-17 16:27:23
  */
 
 /**
@@ -10,14 +10,30 @@
  */
 
 import React, { Component } from "react";
-import { LocaleProvider } from "antd";
+import { LocaleProvider, message } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import RouterRelation from "./router";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "./../../redux/index.reducers";
 import thunkMiddleware from "redux-thunk";
-import { message } from "antd";
+import { setConfig, ajax } from "./../../util/request";
+
+/**
+ * @description axios初始化
+ */
+{
+  setConfig("http://localhost:30000");
+  // setConfig("http://localhost:30001");
+
+  ajax[0]
+    .request("api", {}, res => {
+      console.log(".inner res", res);
+    })
+    .then(res => {
+      console.log(".then  res", res.data);
+    });
+}
 
 /**
  * @description reducers合并，并创建store和router:
@@ -41,7 +57,7 @@ const store = createStore(
 }
 
 /**
- * @description  正式环境反调试
+ * @description  生产环境反调试
  */
 
 {

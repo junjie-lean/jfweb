@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 09:58:26
+ * @Last Modified time: 2019-04-17 15:12:04
  */
 
 /**
@@ -12,6 +12,8 @@
 import React from "react";
 import ReactLoding from "react-loading";
 import G from "./../../config/g";
+
+
 export default class Loading extends React.Component {
   constructor(props) {
     super(props);

@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:28:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 12:52:03
+ * @Last Modified time: 2019-04-17 13:49:09
  */
 
 /**
@@ -12,7 +12,7 @@
 export default {
   name: "前端组统一框架：toc.js --serverless",
   func: [
-    "基于CRA",
+    "基于无服务的CRA",
     "脚手架初始化",
     "antd && redux集成",
     "axios多后台数据请求封装",
