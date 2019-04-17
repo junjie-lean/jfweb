@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 21:08:27
+ * @Last Modified time: 2019-04-17 10:46:23
  */
 
 /**
@@ -17,7 +17,7 @@ process.on("unhandledRejection", err => {
 });
 
 let isDev = process.env.NODE_ENV === "development" ? true : false;
-let PORT = process.env.PORT || 3000;
+let PORT = parseInt(process.env.PORT, 10) || 3000;
 
 let option = {
   env: {
@@ -35,11 +35,10 @@ let option = {
   detached: false
 };
 
-// const start = spawn.sync("npx", ["react-app-rewired", "start"], {...option});
 const start = spawn("npx", ["react-app-rewired", "start"], {
   ...option
 });
 
 start.on("error", err => {
-  console.log("无法启动进程", err);
+  console.log("无法启动脚手架进程", err);
 });
