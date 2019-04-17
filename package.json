@@ -35,7 +35,8 @@
     "cross-spawn": "^6.0.5",
     "customize-cra": "^0.2.12",
     "execa": "^1.0.0",
-    "react-app-rewired": "^2.1.1"
+    "react-app-rewired": "^2.1.1",
+    "zip-local": "^0.3.4"
   },
   "browserslist": [
     ">0.2%",
