@@ -2,32 +2,31 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 16:27:23
+ * @Last Modified time: 2019-04-18 11:13:44
  */
 
 /**
  * @description Provider
  */
 
-import React, { Component } from "react";
+import React from "react";
 import { LocaleProvider, message } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import RouterRelation from "./router";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "./../../redux/index.reducers";
-import thunkMiddleware from "redux-thunk";
-import { setConfig, ajax } from "./../../util/request";
+import { setConfig, request } from "./../../util/request";
 
 /**
- * @description axios初始化
+ * @description 数据服务初始化
  */
 {
   setConfig("http://localhost:30000");
   // setConfig("http://localhost:30001");
 
-  ajax[0]
-    .request("api", {}, res => {
+  request[0]
+    .fetch("api", {}, res => {
       console.log(".inner res", res);
     })
     .then(res => {
@@ -38,13 +37,7 @@ import { setConfig, ajax } from "./../../util/request";
 /**
  * @description reducers合并，并创建store和router:
  */
-const store = createStore(
-  allReducers,
-  compose(
-    applyMiddleware(thunkMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-);
+const store = createStore(allReducers);
 
 /**
  * @description antd 初始化设置

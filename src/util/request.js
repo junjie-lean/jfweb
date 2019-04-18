@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 13:30:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 16:27:06
+ * @Last Modified time: 2019-04-18 11:09:28
  */
 
 /**
@@ -68,7 +68,7 @@ const setConfig = dataService => {
   });
   requestArr.push({
     ind: index++,
-    request: function(me, pr, scb, fcb = () => {}) {
+    fetch: function(me, pr, scb, fcb = () => {}) {
       if (!me) {
         throw new Error("请求数据需要指定方法，参数method不能为空");
       } else {
@@ -131,8 +131,5 @@ const setConfig = dataService => {
   });
 };
 
-const ajax = requestArr;
-export { setConfig, ajax };
-
-// request[0].request();
-// request[0].uploadData();
+const request = requestArr;
+export { setConfig, request };
