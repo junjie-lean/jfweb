@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:59:08
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 10:25:10
+ * @Last Modified time: 2019-04-19 10:05:58
  */
 
 /**
@@ -14,7 +14,21 @@ import lang from "./../../lang/zh_CN";
 import "./../../style/home.scss";
 
 const homelang = lang.home;
+
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  // static getDerivedStateFromProps(nextProps,prevState){
+  //   return {
+  //     ...prevState
+  //   }
+  // }
+
+  
   render() {
     let { name, func } = homelang;
     return (
@@ -26,6 +40,7 @@ export default class Home extends React.Component {
               return <li key={Math.random()}> {item}</li>;
             })}
           </ul>
+
         </div>
       </>
     );

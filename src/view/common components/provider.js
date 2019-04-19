@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-18 11:13:44
+ * @Last Modified time: 2019-04-19 09:51:03
  */
 
 /**
@@ -22,16 +22,16 @@ import { setConfig, request } from "./../../util/request";
  * @description 数据服务初始化
  */
 {
-  setConfig("http://localhost:30000");
+  // setConfig("http://localhost:30000");
   // setConfig("http://localhost:30001");
 
-  request[0]
-    .fetch("api", {}, res => {
-      console.log(".inner res", res);
-    })
-    .then(res => {
-      console.log(".then  res", res.data);
-    });
+  // request[0]
+  //   .fetch("api", {}, res => {
+  //     console.log(".inner res", res);
+  //   })
+  //   .then(res => {
+  //     console.log(".then  res", res.data);
+  //   });
 }
 
 /**
