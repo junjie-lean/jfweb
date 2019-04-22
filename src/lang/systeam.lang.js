@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:28:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 09:51:57
+ * @Last Modified time: 2019-04-22 14:01:10
  */
 
 /**
@@ -10,6 +10,6 @@
  */
 
 export default {
-  systeamTitle: "成都佳发安泰教育科技股份有限公司云巅组前端web框架"
+  systeamTitle: "前端web框架"
   //other
 };
