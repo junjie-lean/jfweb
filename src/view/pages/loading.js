@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 17:46:41
+ * @Last Modified time: 2019-05-10 09:26:32
  */
 
 /**
@@ -21,10 +21,12 @@ export default class Loading extends React.Component {
   }
   componentDidMount() {
     let _this = this;
-    let rt = JSON.parse(u.getQueryString("rt").slice(1, -1));
-    setTimeout(() => {
-      _this.props.history.push(rt.p);
-    }, 3000);
+    if (window.location.href.indexOf("rt") > -1) {
+      let rt = JSON.parse(u.getQueryString("rt").slice(1, -1));
+      setTimeout(() => {
+        _this.props.history.push(rt.p);
+      }, 3000);
+    }
   }
   render() {
     let types = [

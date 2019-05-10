@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:59:08
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-19 10:05:58
+ * @Last Modified time: 2019-05-10 09:26:55
  */
 
 /**
@@ -18,8 +18,7 @@ const homelang = lang.home;
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   // static getDerivedStateFromProps(nextProps,prevState){
@@ -28,19 +27,19 @@ export default class Home extends React.Component {
   //   }
   // }
 
-  
   render() {
     let { name, func } = homelang;
     return (
       <>
         <div className="jfapp-container">
-          <h3>{name}</h3>
+          <h3>{name ? name : ""}</h3>
           <ul>
-            {func.map(item => {
-              return <li key={Math.random()}> {item}</li>;
-            })}
+            {func
+              ? func.map(item => {
+                  return <li key={Math.random()}> {item}</li>;
+                })
+              : ""}
           </ul>
-
         </div>
       </>
     );
