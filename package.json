@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "jf-web-app",
+  "version": "0.2.0",
   "private": true,
   "author": {
     "name": "lean",
@@ -29,8 +29,8 @@
     "sass-loader": "7.1.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./scripts/start.js ",
-    "dev": "cross-env NODE_ENV=development node ./scripts/start.js",
+    "start": "cross-env NODE_ENV=production PORT=4000 node ./scripts/start.js ",
+    "dev": "cross-env NODE_ENV=development PORT=4000 node ./scripts/start.js",
     "build": "node ./scripts/build.js"
   },
   "devDependencies": {
