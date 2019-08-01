@@ -17,8 +17,8 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Loading from "./../pages/loading";
-import Home from './../pages/home';
+import Loading from "../pages/loading";
+import Home from '../pages/home';
 export default class RouterRelation extends React.Component {
   render() {
     return (

@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-19 09:51:03
+ * @Last Modified time: 2019-08-01 10:02:09
  */
 
 /**
@@ -12,11 +12,11 @@
 import React from "react";
 import { LocaleProvider, message } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
-import RouterRelation from "./router";
+import RouterRelation from "../router/router";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import allReducers from "./../../redux/index.reducers";
-import { setConfig, request } from "./../../util/request";
+import allReducers from "../../redux/index.reducers";
+import { setConfig, request } from "../../util/request";
 
 /**
  * @description 数据服务初始化
