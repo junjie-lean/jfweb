@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:28:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 13:49:09
+ * @Last Modified time: 2019-08-05 10:27:07
  */
 
 /**
@@ -10,7 +10,7 @@
  */
 
 export default {
-  name: "前端组统一框架：toc.js --serverless",
+  name: "jf-web-app",
   func: [
     "基于无服务的CRA",
     "脚手架初始化",

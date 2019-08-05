@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 12:46:16
+ * @Last Modified time: 2019-08-05 09:34:01
  */
 
 /**
@@ -12,12 +12,13 @@
  */
 
 const spawn = require("cross-spawn");
+const CUSTOMER_PORT = require("./../package").config.port;
 process.on("unhandledRejection", err => {
   throw err;
 });
 
 let isDev = process.env.NODE_ENV === "development" ? true : false;
-let PORT = parseInt(process.env.PORT, 10) || 3000;
+let PORT = parseInt(CUSTOMER_PORT, 10) || 3000;
 
 let option = {
   env: {

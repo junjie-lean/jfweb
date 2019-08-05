@@ -17,6 +17,7 @@ const baseConfig = {
   systeamTitle: lang.systeam.systeamTitle /** */
 };
 
+
 function createGlobalConfig(isDev) {
   let obj = {
     ...baseConfig

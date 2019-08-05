@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 09:28:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-22 14:01:10
+ * @Last Modified time: 2019-08-05 10:27:17
  */
 
 /**
@@ -10,6 +10,5 @@
  */
 
 export default {
-  systeamTitle: "前端web框架"
-  //other
+  systeamTitle: "jf-web-app"
 };
