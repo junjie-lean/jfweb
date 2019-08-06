@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 12:59:32
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-06 13:43:27
+ * @Last Modified time: 2019-08-06 13:45:52
  */
 
 /**
@@ -11,7 +11,7 @@
 
 import _ from "lodash";
 
-/* 目录 */
+/************************************ 目录 ************************************/
 /**
  * getQueryString ----------- 从URL中获取指定参数
  * goWith ----------- 新开新标签页面的跳转方法
@@ -28,6 +28,9 @@ import _ from "lodash";
  * timeLength ----------- 计算时间长度
  * typeCheck ----------- 变量类型检测
  */
+/************************************ 目录结束 ************************************/
+
+
 
 /************************************ URL相关 ************************************/
 
@@ -346,14 +349,17 @@ const timeLength = (start, end) => {
 /************************************ 其他功能 ************************************/
 
 /**
- * 
+ *
  * @param {*} val  任意类型的变量
  * @description 变量类型检测
  * @returns 返回类型
  */
-const typeCheck = (val)=>{
-  return Object.prototype.toString.call(val).slice(8,-1).toLowerCase();
-}
+const typeCheck = val => {
+  return Object.prototype.toString
+    .call(val)
+    .slice(8, -1)
+    .toLowerCase();
+};
 
 export default {
   getQueryString,

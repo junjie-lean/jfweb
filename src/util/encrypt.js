@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-05 11:06:33
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-06 11:29:11
+ * @Last Modified time: 2019-08-06 13:43:52
  */
 
 /**
@@ -12,7 +12,6 @@
 import G from "./../config/g";
 import crypto from "crypto-browserify";
 const sKey = G.sKey;
-// const encryptionAlgorithm = "aes192";
 const encryptionAlgorithm = "aes-128-cbc";
 
 const _stringToHash = (str = "") => {
@@ -28,7 +27,6 @@ const _hashToString = (hash = "") => {
   $$_string += $decipher.final("utf8");
   return $$_string;
 };
-
 
 const makeUnreadable = (sourceObj = { key: "value" }) => {
   let obj = {};

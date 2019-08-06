@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-01 10:02:09
+ * @Last Modified time: 2019-08-06 14:21:47
  */
 
 /**
@@ -16,7 +16,7 @@ import RouterRelation from "../router/router";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "../../redux/index.reducers";
-import { setConfig, request } from "../../util/request";
+import { setConfig, request } from "../../util/request-ms";
 
 /**
  * @description 数据服务初始化
