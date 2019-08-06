@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-07-24 14:43:11
+ * @Last Modified time: 2019-08-05 10:41:33
  */
 
 /**
@@ -12,7 +12,7 @@
 import React from "react";
 import ReactLoding from "react-loading";
 import G from "./../../config/g";
-import u from "./../../util/_util";
+import U from "./../../util/_util";
 
 export default class Loading extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class Loading extends React.Component {
     let _this = this;
     if (window.location.href.indexOf("rt") > -1) {
       //基于新路由规范的loading跳转逻辑
-      let rt = JSON.parse(u.getQueryString("rt").slice(1, -1));
+      let rt = JSON.parse(U.getQueryString("rt").slice(1, -1));
       setTimeout(() => {
         _this.props.history.push(rt.p);
       }, 3000);

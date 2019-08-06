@@ -10,6 +10,8 @@
   },
   "config": {
     "port": 4000,
+    "lang": "zh-CN",
+    "defaultSKey": "8f8279899e910ad7ac4b76ff695e65a7",
     "other": ""
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "axios": "0.19.0",
     "babel-plugin-import": "1.12.0",
     "cross-env": "5.2.0",
+    "crypto-browserify": "^3.12.0",
     "jsdoc": "3.6.3",
     "lodash": "4.17.15",
     "node-sass": "4.12.0",
