@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-06 14:21:47
+ * @Last Modified time: 2019-08-07 15:01:21
  */
 
 /**
@@ -10,7 +10,7 @@
  */
 
 import React from "react";
-import { LocaleProvider, message } from "antd";
+import { ConfigProvider, message } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import RouterRelation from "../router/router";
 import { createStore } from "redux";
@@ -68,11 +68,11 @@ const store = createStore(allReducers);
 export default class APP extends React.Component {
   render() {
     return (
-      <LocaleProvider locale={zhCN}>
+      <ConfigProvider locale={zhCN}>
         <Provider store={store}>
           <RouterRelation />
         </Provider>
-      </LocaleProvider>
+      </ConfigProvider>
     );
   }
 }
