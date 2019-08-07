@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-07 15:00:45
+ * @Last Modified time: 2019-08-07 15:30:30
  */
 
 /**
@@ -149,10 +149,17 @@ const setConfig = (dataService, token, orgcode) => {
   requestConfig.orgcode = orgcode;
 };
 
+/**
+ * 
+ */
+const requestSingle = (url,params,success = ()=>{},fail = ()=>{})=>{
+  
+}
 
 export default {
   request,
   requestMultiple,
   setConfig,
   formRequest,
+  requestSingle
 };
