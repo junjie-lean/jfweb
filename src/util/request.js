@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-07 15:30:30
+ * @Last Modified time: 2019-08-07 15:47:06
  */
 
 /**
@@ -150,11 +150,18 @@ const setConfig = (dataService, token, orgcode) => {
 };
 
 /**
- * 
+ *
  */
-const requestSingle = (url,params,success = ()=>{},fail = ()=>{})=>{
-  
-}
+const requestSingle = (url, params, success = res => {}, fail = () => {}) => {
+  return axios
+    .post(url)
+    .then(_res => {
+      success(_res);
+    })
+    .catch(err => {
+      fail();
+    });
+};
 
 export default {
   request,
