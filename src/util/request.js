@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-09 11:05:07
+ * @Last Modified time: 2019-08-23 14:25:19
  */
 
 /**
@@ -30,9 +30,7 @@ let requestConfig = {
 const request = (method, params, success, fail, isBlob) => {
   let opts = requestConfig;
   if (!opts.dataService) {
-    throw new Error(
-      "需要设置数据服务地址，请执行_x.util.request.setConfig进行设置"
-    );
+    throw new Error("需要设置数据服务地址，请执行setConfig进行设置");
   }
 
   if (method) {
@@ -40,10 +38,8 @@ const request = (method, params, success, fail, isBlob) => {
       version: opts.version,
       data: params || {},
       alias: opts.alias,
-      token: token || "",
-      orgCode: orgcode,
-      roleLevel,
-      teachOrgId
+      token: opts.token || "",
+      orgCode: opts.orgcode || ""
     };
     const config = {
       headers: {
@@ -158,6 +154,5 @@ export default {
   request,
   requestMultiple,
   setConfig,
-  formRequest,
   requestSingle
 };

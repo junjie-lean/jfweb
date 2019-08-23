@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 13:07:53
+ * @Last Modified time: 2019-08-23 14:20:00
  */
 
 import React from "react";
@@ -13,21 +13,28 @@ import {
   _stringToHash,
   _hashToString
 } from "./../../util/encrypt";
+import { connect } from "react-redux";
 
+//redux-action example
+import { getXXXData_action } from "../../redux/home.reducers";
+@connect(
+  state => state,
+  { getXXXData_action }
+)
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
+    // console.log(require("./../../../package").version);
   }
   componentDidMount() {
     //ie 兼容测试
     const foo = () => {
-      [1, 2, 3].map(item => {
-        console.log(item);
-        
-      });
+      getXXXData_action();
+      [1, 2, 3].map(item => {});
     };
     foo();
   }
+
   render() {
     return (
       <>
