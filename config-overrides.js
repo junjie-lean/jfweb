@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-22 17:59:39
+ * @Last Modified time: 2019-08-23 11:09:12
  */
 
 /**
@@ -38,18 +38,32 @@
     removeModuleScopePlugin
     watchAll
 */
-
+const path = require("path");
 const {
   override,
   disableEsLint,
-  useBabelRc,
   fixBabelImports,
-  addDecoratorsLegacy
+  addDecoratorsLegacy,
+  removeModuleScopePlugin,
+  addWebpackModuleRule,
+  addBabelPlugins,
+  addBabelPlugin,
+  addBabelPresets,
+  addBabelPreset
 } = require("customize-cra");
 
+const rawLoader = {
+  test: [/\.txt$/, /\.svg$/],
+  use: "raw-loader"
+};
 
-const _addWebpackModuleRule = () => {
-  return addWebpackModuleRule({});
+const urlLoader = {
+  test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+  loader: require.resolve("url-loader"),
+  options: {
+    limit: 10000,
+    name: "static/media/[name].[hash:8].[ext]"
+  }
 };
 
 const _fixBabelImports = () => {
@@ -60,11 +74,30 @@ const _fixBabelImports = () => {
   });
 };
 
+//bable的present配置项
+const babelPresets = [
+  "react-app",
+  "@babel/preset-env",
+  "module:@babel/polyfill"
+];
+
+//bable的plugin配置项
+const babelPlugins = ["@babel/transform-runtime"];
+
 module.exports = override(
   addDecoratorsLegacy(), //装饰器
+
   disableEsLint(), //禁用eslint
-  useBabelRc(), //使用babelrc
+
   removeModuleScopePlugin(), //允许从src外部导入模块
-  _addWebpackModuleRule(), //添加module配置
-  _fixBabelImports() //动态引入插件
+
+  _fixBabelImports(), //动态引入插件
+
+  addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
+
+  addBabelPresets("@babel/react", "@babel/env") //添加babel-presets配置
+
+  // addWebpackModuleRule(urlLoader), //添加url-loader配置
+  // addWebpackModuleRule(rawLoader), //添加raw-loader配置
+  // addWebpackModuleRule({ test: /\.txt$/, use: "raw-loader" }),
 );

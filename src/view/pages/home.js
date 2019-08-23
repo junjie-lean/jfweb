@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-07 15:51:15
+ * @Last Modified time: 2019-08-23 13:07:53
  */
 
 import React from "react";
@@ -17,6 +17,16 @@ import {
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    //ie 兼容测试
+    const foo = () => {
+      [1, 2, 3].map(item => {
+        console.log(item);
+        
+      });
+    };
+    foo();
   }
   render() {
     return (
