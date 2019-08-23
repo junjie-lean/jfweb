@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 15:56:32
+ * @Last Modified time: 2019-08-23 17:29:20
  */
 
 import React from "react";
@@ -52,9 +52,9 @@ export default class Home extends React.Component {
         <div className="jfapp-container">
           <h3>
             {/* <Knock /> */}
-            {/* Hello jf-web-app */}
+            Hello jf-web-app
           </h3>
-          {/* <h4>version : {this.state.version}</h4> */}
+          <h4>version : {this.state.version}</h4>
         </div>
       </>
     );

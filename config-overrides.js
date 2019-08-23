@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 16:34:24
+ * @Last Modified time: 2019-08-23 17:27:43
  */
 
 /**
@@ -39,7 +39,8 @@
     watchAll
 */
 const path = require("path");
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require("autoprefixer");
+const rewireSVGR = require("react-app-rewire-svgr");
 const {
   override,
   disableEsLint,
@@ -115,7 +116,7 @@ module.exports = override(
 
   removeModuleScopePlugin(), //允许从src外部导入模块
 
-  addWebpackModuleRule(rawLoader), //添加raw-loader配置
+  // addWebpackModuleRule(rawLoader), //添加raw-loader配置
 
   addWebpackModuleRule(urlLoader), //添加url-loader配置
 
@@ -127,5 +128,7 @@ module.exports = override(
 
   addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
 
-  addBabelPresets("@babel/react", "@babel/env") //添加babel-presets配置
+  addBabelPresets("@babel/react", "@babel/env"), //添加babel-presets配置
+  
+  rewireSVGR()
 );
