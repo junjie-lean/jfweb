@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 11:09:12
+ * @Last Modified time: 2019-08-23 16:34:24
  */
 
 /**
@@ -39,6 +39,7 @@
     watchAll
 */
 const path = require("path");
+const autoprefixer = require('autoprefixer');
 const {
   override,
   disableEsLint,
@@ -53,7 +54,7 @@ const {
 } = require("customize-cra");
 
 const rawLoader = {
-  test: [/\.txt$/, /\.svg$/],
+  test: /\.svg$/,
   use: "raw-loader"
 };
 
@@ -66,6 +67,39 @@ const urlLoader = {
   }
 };
 
+const fileLoader = {
+  exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+  loader: require.resolve("file-loader"),
+  options: {
+    name: "static/media/[name].[hash:8].[ext]"
+  }
+};
+
+const cssLoader = {
+  test: /\.css$/,
+  use: [
+    require.resolve("style-loader"),
+    {
+      loader: require.resolve("css-loader"),
+      options: {
+        importLoaders: 1
+      }
+    },
+    {
+      loader: require.resolve("postcss-loader"),
+      options: {
+        ident: "postcss",
+        plugins: () => [
+          require("postcss-flexbugs-fixes"),
+          autoprefixer({
+            flexbox: "no-2009"
+          })
+        ]
+      }
+    }
+  ]
+};
+
 const _fixBabelImports = () => {
   return fixBabelImports("import", {
     libraryName: "antd",
@@ -74,16 +108,6 @@ const _fixBabelImports = () => {
   });
 };
 
-//bable的present配置项
-const babelPresets = [
-  "react-app",
-  "@babel/preset-env",
-  "module:@babel/polyfill"
-];
-
-//bable的plugin配置项
-const babelPlugins = ["@babel/transform-runtime"];
-
 module.exports = override(
   addDecoratorsLegacy(), //装饰器
 
@@ -91,13 +115,17 @@ module.exports = override(
 
   removeModuleScopePlugin(), //允许从src外部导入模块
 
+  addWebpackModuleRule(rawLoader), //添加raw-loader配置
+
+  addWebpackModuleRule(urlLoader), //添加url-loader配置
+
+  // addWebpackModuleRule(fileLoader), //添加file-loader配置
+
+  // addWebpackModuleRule(cssLoader), //添加css-loader配置
+
   _fixBabelImports(), //动态引入插件
 
   addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
 
   addBabelPresets("@babel/react", "@babel/env") //添加babel-presets配置
-
-  // addWebpackModuleRule(urlLoader), //添加url-loader配置
-  // addWebpackModuleRule(rawLoader), //添加raw-loader配置
-  // addWebpackModuleRule({ test: /\.txt$/, use: "raw-loader" }),
 );

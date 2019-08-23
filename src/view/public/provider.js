@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 14:27:15
+ * @Last Modified time: 2019-08-23 15:42:23
  */
 
 /**
@@ -18,10 +18,12 @@ import { Provider } from "react-redux";
 import allReducers from "../../redux/index.reducers";
 import request from "./../../util/request";
 
-/**
- * @description 数据服务初始化
- */
+
+
 {
+  /**
+   * @description 数据服务初始化
+   */
   const setConfig = request.setConfig;
   setConfig("http://10.10.1.156:1612/", "token", "orgcode");
 }
