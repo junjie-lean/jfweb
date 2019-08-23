@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-07 15:47:06
+ * @Last Modified time: 2019-08-09 11:05:07
  */
 
 /**
@@ -16,24 +16,18 @@ import axios from "axios";
  */
 let requestConfig = {
     dataService: "", //数据服务入口
-    version: "2.0",
-    alias: "clweb",
+    version: "0.2.0",
+    alias: "web",
     token: "",
     orgcode: ""
   },
   axiosIns;
-let testData = {};
 /**
  * 请求数据服务
  * @param {String} method 请求的方法
  * @param {JSON} params 提交参数
  */
 const request = (method, params, success, fail, isBlob) => {
-  let token = sessionStorage.getItem("token");
-  let orgcode = sessionStorage.getItem("orgCode");
-  let roleLevel = Number(sessionStorage.getItem("roleLevel"));
-  let teachOrgId = sessionStorage.getItem("teachOrgId");
-
   let opts = requestConfig;
   if (!opts.dataService) {
     throw new Error(
@@ -42,61 +36,53 @@ const request = (method, params, success, fail, isBlob) => {
   }
 
   if (method) {
-    if (opts.testmode) {
-      success({
-        IsSuccess: true,
-        ErrMsg: "",
-        Data: testData[method]
-      });
-    } else {
-      let postData = {
-        version: opts.version,
-        data: params || {},
-        alias: opts.alias,
-        token: token || "",
-        orgCode: orgcode,
-        roleLevel,
-        teachOrgId
-      };
-      const config = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      if (isBlob) {
-        config.responseType = "blob";
+    let postData = {
+      version: opts.version,
+      data: params || {},
+      alias: opts.alias,
+      token: token || "",
+      orgCode: orgcode,
+      roleLevel,
+      teachOrgId
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
       }
-      const ajaxObj = axiosIns.post(
-        `/${method}`,
-        `${JSON.stringify(postData)}`,
-        config
-      );
-      ajaxObj
-        .then(response => {
-          if (typeof success === "function") {
-            success(response.data);
-          } else {
-            console.log(response.data);
-          }
-        })
-        .catch(err => {
-          if (typeof fail === "function") {
-            fail({ code: err.code, msg: err.message });
-          } else {
-            console.log("request fail");
-          }
-        });
-
-      if (typeof fail === "function") {
-        ajaxObj.catch(fail);
-      } else if (opts.globalFail) {
-        ajaxObj.catch(opts.globalFail);
-      }
-
-      return ajaxObj;
+    };
+    if (isBlob) {
+      config.responseType = "blob";
     }
+    const ajaxObj = axiosIns.post(
+      `/${method}`,
+      `${JSON.stringify(postData)}`,
+      config
+    );
+    ajaxObj
+      .then(response => {
+        if (typeof success === "function") {
+          success(response.data);
+        } else {
+          console.log(response.data);
+        }
+      })
+      .catch(err => {
+        if (typeof fail === "function") {
+          fail({ code: err.code, msg: err.message });
+        } else {
+          console.log("request fail");
+        }
+      });
+
+    if (typeof fail === "function") {
+      ajaxObj.catch(fail);
+    } else if (opts.globalFail) {
+      ajaxObj.catch(opts.globalFail);
+    }
+
+    return ajaxObj;
   } else {
-    throw new Error("参数method不能为空");
+    throw new Error("缺失参数‘Method’");
   }
 };
 
@@ -151,10 +137,15 @@ const setConfig = (dataService, token, orgcode) => {
 
 /**
  *
+ * @param { String } url
+ * @param { Object } params
+ * @param { Function } success
+ * @param { Function } fail
  */
 const requestSingle = (url, params, success = res => {}, fail = () => {}) => {
+  let _params = "data=" + JSON.stringify(params);
   return axios
-    .post(url)
+    .post(url, _params)
     .then(_res => {
       success(_res);
     })
