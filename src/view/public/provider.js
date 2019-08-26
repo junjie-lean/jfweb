@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 15:42:23
+ * @Last Modified time: 2019-08-26 10:44:49
  */
 
 /**
@@ -17,8 +17,6 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "../../redux/index.reducers";
 import request from "./../../util/request";
-
-
 
 {
   /**
@@ -37,9 +35,11 @@ const store = createStore(allReducers);
   /**
    * @description antd 初始化设置
    */
-  message.config = {
+  message.config({
+    top: 100,
+    duration: 2,
     maxCount: 1
-  };
+  });
 }
 
 {

@@ -2,22 +2,27 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 09:08:52
+ * @Last Modified time: 2019-08-26 13:41:15
  */
 
 import React from "react";
 import "./../../style/home.scss";
+
 import {
   makeReadable,
   makeUnreadable,
   _stringToHash,
   _hashToString
 } from "./../../util/encrypt";
+
 import { connect } from "react-redux";
+import { Button, message } from "antd";
 //redux-action example
 import { getXXXData_action } from "../../redux/home.reducers";
 
-// import Add from "./../../media/svg/SVG/add.svg";
+import SVGR from "./../../media/svg/SVG/live.svg";
+
+import PNGR from "./../../media/picture/loading.gif";
 
 @connect(
   state => state,
@@ -39,11 +44,17 @@ export default class Home extends React.Component {
     };
     foo();
   }
+
+  //不再推荐使用componentWillReceiveProps
   static getDerivedStateFromProps(nextPorps, prevState) {
-    console.log(nextPorps);
+    console.log("props 刷新：", nextPorps);
     return {
       ...prevState
     };
+  }
+
+  clickHandle(version) {
+    message.success(`当前框架等级为：${version}`);
   }
 
   render() {
@@ -51,10 +62,21 @@ export default class Home extends React.Component {
       <>
         <div className="jfapp-container">
           <h3>
-            {/* <Add /> */}
+            <SVGR style={{ height: 15 }} />
             Hello jf-web-app
           </h3>
-          <h4>version : {this.state.version}</h4>
+
+          <div style={{ position: "absolute", top: 4, right: 4,width:30 }}>
+            <img style={{ width: "100%" }} src={PNGR} alt="图片加载失败" />
+          </div>
+          <br />
+          <Button
+            type="primary"
+            onClick={this.clickHandle.bind(this, this.state.version)}
+          >
+            show Versin
+          </Button>
+          <hr />
         </div>
       </>
     );
