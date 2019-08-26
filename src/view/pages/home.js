@@ -2,28 +2,29 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 13:55:29
+ * @Last Modified time: 2019-08-26 17:34:14
  */
 
 import React from "react";
 import "./../../style/home.scss";
 
-import {
-  makeReadable,
-  makeUnreadable,
-  _stringToHash,
-  _hashToString
-} from "./../../util/encrypt";
+// import {
+//   makeReadable,
+//   makeUnreadable,
+//   _stringToHash,
+//   _hashToString
+// } from "./../../util/encrypt";
 
 import { connect } from "react-redux";
 import { Button, message } from "antd";
-//redux-action example
+
 import { getXXXData_action } from "../../redux/home.reducers";
 
-import SVGR from "./../../media/svg/SVG/live.svg";
-
-import PNGR from "./../../media/picture/loading.gif";
-
+// import PNGR from "./../../media/picture/loading.gif";
+import PNGR from "./../../media/picture/ava.png";
+import txt from "!!raw-loader!./../../config/example.txt";
+import SVG from "./../public/svg";
+import VIDEO from "./../../media/video/thatGirl.mp4";
 @connect(
   state => state,
   { getXXXData_action }
@@ -39,7 +40,7 @@ export default class Home extends React.Component {
   componentDidMount() {
     //ie 兼容测试
     const foo = () => {
-      getXXXData_action();
+      // getXXXData_action();
       [1, 2, 3].map(item => {});
     };
     foo();
@@ -62,7 +63,7 @@ export default class Home extends React.Component {
       <>
         <div className="jfapp-container">
           <h3>
-            <SVGR style={{ height: 15 }} />
+            <SVG type="live" width="14px" height="14px" />
             Hello jf-web-app
           </h3>
 
@@ -77,6 +78,8 @@ export default class Home extends React.Component {
             Ant Design支持
           </Button>
           <hr />
+          <p>{txt}</p>
+          {/* <video src={VIDEO} autoPlay controls /> */}
         </div>
       </>
     );

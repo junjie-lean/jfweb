@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 15:05:48
+ * @Last Modified time: 2019-08-26 16:46:12
  */
 
 /**
@@ -71,14 +71,14 @@ const setWebpack = () => (config, env) => {
     devtool: process.env.NODE_ENV == "production" ? false : "source-map",
     output: {
       path: path.resolve(__dirname, "build"),
-      filename: "js/jfWeb.bundle[id].js"
+      filename: "js/jfWeb.bundle.js"
     }
   };
   return _config;
 };
 
 const rawLoader = {
-  test: /\.svg$/i,
+  test: [/\.txt$/i, /\.svg$/i],
   use: "raw-loader"
 };
 
@@ -88,8 +88,8 @@ const urlLoader = {
     {
       loader: "url-loader",
       options: {
-        limit: 1024,
-        name: "static/img/[name].[hash:8].[ext]"
+        limit: 10240, //byte  10k
+        fallback: "file-loader"
       }
     }
   ]
@@ -97,41 +97,49 @@ const urlLoader = {
 };
 
 const fileLoader = {
-  exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-  loader: require.resolve("file-loader"),
-  options: {
-    name(file) {
-      if (process.env.NODE_ENV === "development") {
-        return "[path][name].[ext]";
-      }
-      return "[contenthash].[ext]";
-    }
-  }
+  // exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.s?css$/],
+  // loader: require.resolve("file-loader"),
+  // options: {
+  //   name(file) {
+  //     if (process.env.NODE_ENV === "development") {
+  //       return "[path][name].[ext]";
+  //     }
+  //     return "[contenthash].[ext]";
+  //   }
+  // }
+  test: /\.(png|jpe?g|gif)$/,
+  use: "file-loader"
 };
 
 const cssLoader = {
-  test: /\.css$/,
+  test: /\.(sc|c|sa)ss$/,
   use: [
-    require.resolve("style-loader"),
+    "style-loader",
     {
-      loader: require.resolve("css-loader"),
+      loader: "css-loader",
       options: {
-        modules: true,
-        importLoaders: 1
+        sourceMap: process.env.NODE_ENV == "development"
+      }
+    },
+    {
+      loader: "postcss-loader",
+      options: {
+        ident: "postcss",
+        sourceMap: true,
+        plugins: loader => [
+          require("autoprefixer")({
+            browsers: require("./../package").browserslist
+          })
+        ]
+      }
+    },
+
+    {
+      loader: "sass-loader",
+      options: {
+        sourceMap: process.env.NODE_ENV == "development"
       }
     }
-    // {
-    //   loader: require.resolve("postcss-loader"),
-    //   options: {
-    //     ident: "postcss",
-    //     plugins: () => [
-    //       require("postcss-flexbugs-fixes"),
-    //       autoprefixer({
-    //         flexbox: "no-2009"
-    //       })
-    //     ]
-    //   }
-    // }
   ]
 };
 
@@ -150,13 +158,13 @@ module.exports = override(
 
   removeModuleScopePlugin(), //允许从src外部导入模块
 
-  // addWebpackModuleRule(urlLoader), //添加url-loader配置
+  addWebpackModuleRule(rawLoader), //添加raw-loader配置
 
-  // addWebpackModuleRule(cssLoader), //添加css-loader配置
+  // addWebpackModuleRule(urlLoader), //添加url-loader配置
 
   // addWebpackModuleRule(fileLoader), //添加file-loader配置
 
-  // addWebpackModuleRule(rawLoader), //添加raw-loader配置
+  // addWebpackModuleRule(cssLoader), //添加css-loader配置
 
   _fixBabelImports(), //动态引入插件
 
@@ -164,7 +172,7 @@ module.exports = override(
 
   addBabelPresets("@babel/react", "@babel/env"), //添加babel-presets配置
 
-  rewireSVG(), //添加svg支持
+  // rewireSVG(), //添加svg支持
 
   addLessLoader(), //添加less支持
 
