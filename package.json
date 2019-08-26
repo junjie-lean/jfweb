@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "description": "基于cra二次封装的react框架",
+  "homepage": ".",
   "scripts": {
     "start": "npx --no-install cross-env NODE_ENV=production node ./scripts/start.js ",
     "dev": "npx --no-install cross-env NODE_ENV=development node ./scripts/start.js",

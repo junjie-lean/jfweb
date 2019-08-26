@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 13:41:15
+ * @Last Modified time: 2019-08-26 13:55:29
  */
 
 import React from "react";
@@ -66,7 +66,7 @@ export default class Home extends React.Component {
             Hello jf-web-app
           </h3>
 
-          <div style={{ position: "absolute", top: 4, right: 4,width:30 }}>
+          <div style={{ position: "absolute", top: 4, right: 4, width: 30 }}>
             <img style={{ width: "100%" }} src={PNGR} alt="图片加载失败" />
           </div>
           <br />
@@ -74,7 +74,7 @@ export default class Home extends React.Component {
             type="primary"
             onClick={this.clickHandle.bind(this, this.state.version)}
           >
-            show Versin
+            Ant Design支持
           </Button>
           <hr />
         </div>

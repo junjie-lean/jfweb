@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 13:40:12
+ * @Last Modified time: 2019-08-26 15:05:48
  */
 
 /**
@@ -38,6 +38,7 @@
     removeModuleScopePlugin
     watchAll
 */
+
 const path = require("path");
 const autoprefixer = require("autoprefixer");
 const rewireSVGLoader = require("react-app-rewire-svg-react-loader");
@@ -59,6 +60,21 @@ const {
 
 const rewireSVG = () => (config, env) => {
   return rewireSVGLoader(config, env);
+};
+
+const setWebpack = () => (config, env) => {
+  config.mode =
+    process.env.NODE_ENV == "production" ? "production" : "development";
+
+  let _config = {
+    ...config,
+    devtool: process.env.NODE_ENV == "production" ? false : "source-map",
+    output: {
+      path: path.resolve(__dirname, "build"),
+      filename: "js/jfWeb.bundle[id].js"
+    }
+  };
+  return _config;
 };
 
 const rawLoader = {
@@ -150,5 +166,7 @@ module.exports = override(
 
   rewireSVG(), //添加svg支持
 
-  addLessLoader() //添加less支持
+  addLessLoader(), //添加less支持
+
+  setWebpack() //针对webpack的配置
 );
