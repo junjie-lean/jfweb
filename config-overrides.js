@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 17:27:43
+ * @Last Modified time: 2019-08-26 09:14:38
  */
 
 /**
@@ -40,7 +40,12 @@
 */
 const path = require("path");
 const autoprefixer = require("autoprefixer");
-const rewireSVGR = require("react-app-rewire-svgr");
+const rewireSVGLoader = require("react-app-rewire-svgr");
+
+// const rewireSVG = () => (config, env) => {
+//   return rewireSVGLoader(config, env);
+// };
+
 const {
   override,
   disableEsLint,
@@ -56,8 +61,21 @@ const {
 
 const rawLoader = {
   test: /\.svg$/,
-  use: "raw-loader"
+  // use: [
+  //   {
+  //     loader: "babel-loader",
+  //     options: {
+  //       presets: ["preact", "env"]
+  //     }
+  //   },
+  //   {
+  //     loader: "@svgr/webpack",
+  //     options: { babel: false }
+  //   }
+  // ]
+  use:"raw-loader"
 };
+
 
 const urlLoader = {
   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -116,9 +134,9 @@ module.exports = override(
 
   removeModuleScopePlugin(), //允许从src外部导入模块
 
-  // addWebpackModuleRule(rawLoader), //添加raw-loader配置
+  addWebpackModuleRule(rawLoader), //添加raw-loader配置
 
-  addWebpackModuleRule(urlLoader), //添加url-loader配置
+  // addWebpackModuleRule(urlLoader), //添加url-loader配置
 
   // addWebpackModuleRule(fileLoader), //添加file-loader配置
 
@@ -128,7 +146,7 @@ module.exports = override(
 
   addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
 
-  addBabelPresets("@babel/react", "@babel/env"), //添加babel-presets配置
-  
-  rewireSVGR()
+  addBabelPresets("@babel/react", "@babel/env") //添加babel-presets配置
+
+  // rewireSVG()
 );

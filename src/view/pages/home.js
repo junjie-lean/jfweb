@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 17:29:20
+ * @Last Modified time: 2019-08-26 09:08:52
  */
 
 import React from "react";
@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 //redux-action example
 import { getXXXData_action } from "../../redux/home.reducers";
 
-// import Knock from "./../../media/svg/SVG/password";
+// import Add from "./../../media/svg/SVG/add.svg";
 
 @connect(
   state => state,
@@ -51,7 +51,7 @@ export default class Home extends React.Component {
       <>
         <div className="jfapp-container">
           <h3>
-            {/* <Knock /> */}
+            {/* <Add /> */}
             Hello jf-web-app
           </h3>
           <h4>version : {this.state.version}</h4>
