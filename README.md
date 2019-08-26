@@ -1,4 +1,4 @@
-[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+<!-- [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) -->
 
 ## Available Scripts
 
@@ -7,7 +7,7 @@ In the project directory, you can run:
 ### `npm run dev`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:4000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
