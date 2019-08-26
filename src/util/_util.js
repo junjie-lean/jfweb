@@ -2,14 +2,35 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 12:59:32
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 13:23:10
+ * @Last Modified time: 2019-08-06 13:45:52
  */
 
 /**
- * @description 整理之前的_x通用工具集,并对部分方法重新封装
+ * @description 整理之前的_x通用工具集,并对部分方法重新封装。
  */
 
 import _ from "lodash";
+
+/************************************ 目录 ************************************/
+/**
+ * getQueryString ----------- 从URL中获取指定参数
+ * goWith ----------- 新开新标签页面的跳转方法
+ * toChinese ----------- 将数字转换成中文文本
+ * formatSize ----------- 格式化字节大小字符串
+ * Number.prototype.formatSize ----------- 同上
+ * getWeekFromYear ----------- 获取从某一年开始计算到指定日期值的周数
+ * getWeekFromMonth ----------- 获取指定日期在本月的周数
+ * getWeekStart ----------- 获取指定时间所在周的第一天日期
+ * getMonthDays ----------- 获取指定时间所在月的天数
+ * formatDate ----------- 日期时间指定格式化
+ * formatSec ----------- 格式化秒数
+ * formatMin ----------- 秒数转化成分钟
+ * timeLength ----------- 计算时间长度
+ * typeCheck ----------- 变量类型检测
+ */
+/************************************ 目录结束 ************************************/
+
+
 
 /************************************ URL相关 ************************************/
 
@@ -21,9 +42,9 @@ import _ from "lodash";
  * @returns 指定参数
  */
 const getQueryString = name => {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
   let w = window.location.href.slice(window.location.href.indexOf("/"));
-  var r = w.substr(1).match(reg);
+  let r = w.substr(1).match(reg);
   if (r != null) return unescape(r[2]);
   return null;
 };
@@ -53,9 +74,9 @@ const goWith = (pr = { to: "index", with: [] }) => {
  * @returns {String}  转换后的字符串
  */
 const toChinese = (number, bIsCapital) => {
-  var str = number + "";
-  var len = str.length - 1;
-  var idxs = [
+  let str = number + "";
+  let len = str.length - 1;
+  let idxs = [
     "",
     "十",
     "百",
@@ -74,14 +95,14 @@ const toChinese = (number, bIsCapital) => {
     "千",
     "亿"
   ];
-  var num;
+  let num;
   if (bIsCapital) {
     num = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
   } else {
     num = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
   }
   return str.replace(/([1-9]|0+)/g, function($, $1, idx, full) {
-    var pos = 0;
+    let pos = 0;
     if ($1[0] !== "0") {
       pos = len - idx;
       if (idx === 0 && $1[0] === 1 && idxs[pos] === "十") {
@@ -89,8 +110,8 @@ const toChinese = (number, bIsCapital) => {
       }
       return num[$1[0]] + idxs[pos];
     } else {
-      var left = len - idx;
-      var right = left + $1.length;
+      let left = len - idx;
+      let right = left + $1.length;
       if (Math.floor(right / 4) - Math.floor(left / 4) > 0) {
         pos = left - (left % 4);
       }
@@ -104,6 +125,7 @@ const toChinese = (number, bIsCapital) => {
     }
   });
 };
+
 /**
  * @param   {Number} number    需要转换的数字
  * @param   {Boolean} baseUnit 基准单位，默认为K
@@ -113,7 +135,7 @@ const toChinese = (number, bIsCapital) => {
 const formatSize = (number, baseUnit) => {
   baseUnit = baseUnit || "";
   baseUnit = baseUnit.toUpperCase();
-  var units = ["", "K", "M", "G", "T"],
+  let units = ["", "K", "M", "G", "T"],
     cnt = 0,
     size = number,
     index = 0;
@@ -130,35 +152,13 @@ const formatSize = (number, baseUnit) => {
 };
 
 /**
- * @param { Number } point
- * @description 星星评分显示
- */
-const formatPoint = point => {
-  let tmp = point + "";
-  if (tmp.length == 1) {
-    tmp += ".01";
-  } else if (tmp.length == 3) {
-    tmp += "1";
-  }
-  let cc = tmp.slice(0, 1);
-  let rate = tmp.slice(2, 4);
-  if (rate >= 75) {
-    return cc - 0 + 1;
-  } else if (rate >= 25 && rate < 75) {
-    return cc + ".5" - 0;
-  } else {
-    return cc - 0;
-  }
-};
-
-/**
- * @param { String }
+ * @param { String } baseUnit 基准单位，默认为K
  * @description 文件大小转换 数字类型原型方法
  */
 Number.prototype.formatSize = baseUnit => {
   baseUnit = baseUnit || "K";
   baseUnit = baseUnit.toUpperCase();
-  var units = ["K", "M", "G", "T"],
+  let units = ["K", "M", "G", "T"],
     cnt = 0,
     size = this,
     index = 0;
@@ -189,9 +189,9 @@ const getWeekFromYear = (date, nYear, nWeekStart) => {
   if (!nYear) {
     nYear = date.getFullYear();
   }
-  var dFirstDay = new Date(nYear, 0, 1);
-  var nFirstWeekDays = 7 - dFirstDay.getDay() + nWeekStart;
-  var nDayOfYear =
+  let dFirstDay = new Date(nYear, 0, 1);
+  let nFirstWeekDays = 7 - dFirstDay.getDay() + nWeekStart;
+  let nDayOfYear =
     (new Date(date.getFullYear(), date.getMonth(), date.getDate()) -
       dFirstDay) /
       (24 * 3600 * 1000) +
@@ -200,17 +200,18 @@ const getWeekFromYear = (date, nYear, nWeekStart) => {
 };
 
 /**
- * 获取指定日期在本月的周数
+ *
  * @param   {Date} date         指定日期
  * @param   {Number} nWeekStart 每周开始为周几，默认为周一, 可选值1到7
  * @returns {Number} 总周数
+ * @description 获取指定日期在本月的周数
  */
-export const getWeekFromMonth = function(date, nWeekStart) {
+const getWeekFromMonth = (date, nWeekStart) => {
   nWeekStart = (nWeekStart || 1) % 7;
   if (isNaN(nWeekStart) || nWeekStart > 7) nWeekStart = 1;
-  var dFirstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-  var nFirstWeekDays = 7 - dFirstDay.getDay() + nWeekStart;
-  var nDayOfYear =
+  let dFirstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+  let nFirstWeekDays = 7 - dFirstDay.getDay() + nWeekStart;
+  let nDayOfYear =
     (new Date(date.getFullYear(), date.getMonth(), date.getDate()) -
       dFirstDay) /
       (24 * 3600 * 1000) +
@@ -227,7 +228,7 @@ export const getWeekFromMonth = function(date, nWeekStart) {
 const getWeekStart = (date, nWeekStart) => {
   nWeekStart = (nWeekStart || 1) % 7;
   if (isNaN(nWeekStart) || nWeekStart > 7) nWeekStart = 1;
-  var ndate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  let ndate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   ndate.setDate(date.getDate() - date.getDay() + nWeekStart);
   return ndate;
 };
@@ -238,7 +239,7 @@ const getWeekStart = (date, nWeekStart) => {
  * @description 获取指定时间所在月的天数
  */
 const getMonthDays = date => {
-  var d = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  let d = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   return d.getDate();
 };
 
@@ -246,11 +247,11 @@ const getMonthDays = date => {
  * @param   {Date} date         指定日期
  * @param   {String} [sFmt='yyyy-MM-dd HH:mm:ss'] 输出的日期时间格式 默认值为'yyyy-MM-dd HH:mm:ss'
  * @returns {String} 格式化后的字符串
- * @description 日期时间格式化
+ * @description 日期时间指定格式化
  */
 const formatDate = (date, sFmt) => {
   sFmt = sFmt || "yyyy-MM-dd HH:mm:ss";
-  var aWeekDay = ["日", "一", "二", "三", "四", "五", "六"],
+  let aWeekDay = ["日", "一", "二", "三", "四", "五", "六"],
     obj = {
       y: date.getFullYear(), // 年份，注意必须用getFullYear
       M: date.getMonth() + 1, // 月份，注意是从0-11
@@ -264,12 +265,12 @@ const formatDate = (date, sFmt) => {
       S: date.getMilliseconds() // 毫秒
     };
   const replacefun = m => {
-    var val = String(obj[i]);
+    let val = String(obj[i]);
     if (i === "w") return (m.length > 2 ? "星期" : "周") + aWeekDay[val];
     val = _.padStart(val, m.length, "0");
     return m.length === 1 ? val : val.substring(val.length - m.length);
   };
-  for (var i in obj) {
+  for (let i in obj) {
     sFmt = sFmt.replace(new RegExp(i + "+", "g"), replacefun);
   }
 
@@ -279,7 +280,7 @@ const formatDate = (date, sFmt) => {
 /**
  *
  * @param {Number} sec
- * @description
+ * @description 格式化秒数
  */
 const formatSec = sec => {
   let time;
@@ -330,7 +331,7 @@ const formatMin = sec => {
  * @param {String} 结束时间
  * @description 计算时间长度
  */
-const TimeLength = (start, end) => {
+const timeLength = (start, end) => {
   let starts = start.split(":");
   let ends = end.split(":");
   let startLong =
@@ -345,17 +346,33 @@ const TimeLength = (start, end) => {
   return result > 0 ? result : 0;
 };
 
+/************************************ 其他功能 ************************************/
+
+/**
+ *
+ * @param {*} val  任意类型的变量
+ * @description 变量类型检测
+ * @returns 返回类型
+ */
+const typeCheck = val => {
+  return Object.prototype.toString
+    .call(val)
+    .slice(8, -1)
+    .toLowerCase();
+};
+
 export default {
   getQueryString,
   goWith,
   toChinese,
   formatSize,
-  formatPoint,
-  TimeLength,
+  timeLength,
   formatMin,
   formatSec,
   formatDate,
+  getWeekFromMonth,
   getMonthDays,
   getWeekStart,
-  getWeekFromYear
+  getWeekFromYear,
+  typeCheck
 };

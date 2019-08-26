@@ -3,5 +3,5 @@ node_modules
 /build/**/*
 package-lock.json
 build.zip
-z-list
-相关文档/**/*
+documents/**/*
+src/view/pages/test.js

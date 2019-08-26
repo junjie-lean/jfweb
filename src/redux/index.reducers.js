@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 21:01:49
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-16 21:02:43
+ * @Last Modified time: 2019-08-23 14:19:22
  */
 
 /**
@@ -10,14 +10,8 @@
  */
 
 import { combineReducers } from "redux";
-
-/**
- * @description example
- */
-const test = () => {
-  return {};
-};
+import { getXXXData_reducer } from "./home.reducers";
 
 export default combineReducers({
-  test
+  getXXXData_reducer
 });

@@ -1,135 +1,158 @@
 /*
  * @Author: junjie.lean
- * @Date: 2019-04-17 13:30:36
+ * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-18 11:09:28
+ * @Last Modified time: 2019-08-23 14:25:19
  */
 
 /**
- * @description axios 多后台请求方式封装
+ * @description axios 单后台请求方式封装
  */
 
 import axios from "axios";
-import _ from "lodash";
 
-//axios原型的实例数组；
-let axiosinsArr = [];
-//实例对象下对应的请求方法数组；
-let requestArr = [];
-//默认请求体
-let requestArgument = {
-  version: "1.0",
-  alias: "",
-  token: "",
-  orgcode: ""
+/**
+ * 数据请求相关配置
+ */
+let requestConfig = {
+    dataService: "", //数据服务入口
+    version: "0.2.0",
+    alias: "web",
+    token: "",
+    orgcode: ""
+  },
+  axiosIns;
+/**
+ * 请求数据服务
+ * @param {String} method 请求的方法
+ * @param {JSON} params 提交参数
+ */
+const request = (method, params, success, fail, isBlob) => {
+  let opts = requestConfig;
+  if (!opts.dataService) {
+    throw new Error("需要设置数据服务地址，请执行setConfig进行设置");
+  }
+
+  if (method) {
+    let postData = {
+      version: opts.version,
+      data: params || {},
+      alias: opts.alias,
+      token: opts.token || "",
+      orgCode: opts.orgcode || ""
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    if (isBlob) {
+      config.responseType = "blob";
+    }
+    const ajaxObj = axiosIns.post(
+      `/${method}`,
+      `${JSON.stringify(postData)}`,
+      config
+    );
+    ajaxObj
+      .then(response => {
+        if (typeof success === "function") {
+          success(response.data);
+        } else {
+          console.log(response.data);
+        }
+      })
+      .catch(err => {
+        if (typeof fail === "function") {
+          fail({ code: err.code, msg: err.message });
+        } else {
+          console.log("request fail");
+        }
+      });
+
+    if (typeof fail === "function") {
+      ajaxObj.catch(fail);
+    } else if (opts.globalFail) {
+      ajaxObj.catch(opts.globalFail);
+    }
+
+    return ajaxObj;
+  } else {
+    throw new Error("缺失参数‘Method’");
+  }
 };
-let index = 0;
+
+/**
+ * @description 同时进行多个请求，全部完成时执行回调
+ * @param {Array} requestList 请求列表[{method:'',params:{}}...]
+ */
+const requestMultiple = (requestList, success, fail) => {
+  let reqlist, axiosobj;
+  requestList = requestList || [];
+  if (requestList.length === 0) {
+    throw new Error("arguments 不能为空");
+  }
+  reqlist = requestList.map(item => {
+    return request(item.method, item.params, item.success, item.fail);
+  });
+  axiosobj = axios.all(reqlist);
+  if (typeof success === "function") {
+    axiosobj.then(
+      axios.spread(function() {
+        let rets = [];
+        for (let i = 0; i < arguments.length; i++) {
+          rets.push(arguments[i]);
+        }
+        success(...rets);
+      })
+    );
+  }
+
+  if (typeof fail === "function") {
+    axiosobj.catch(fail);
+  }
+};
+
+/**
+ * @description 设置数据服务配置
+ * @param {String} dataService 数据服务地址
+ */
+const setConfig = (dataService, token, orgcode) => {
+  dataService = dataService || "/";
+  if (!_.endsWith(dataService, "/")) {
+    dataService = dataService + "/";
+  }
+  requestConfig.dataService = dataService;
+  axiosIns = axios.create({
+    baseURL: dataService
+  });
+
+  requestConfig.token = token;
+  requestConfig.orgcode = orgcode;
+};
 
 /**
  *
- * @param {Object or String} dataService
- * @description 参数可以为包含数据服务属性/token/orgcode的对象,也可以仅是数据服务地址
+ * @param { String } url
+ * @param { Object } params
+ * @param { Function } success
+ * @param { Function } fail
  */
-const setConfig = dataService => {
-  let instanceOfRequest, inxtanceOfUplodafile;
-  if (typeof dataService === "string") {
-    instanceOfRequest = axios.create({
-      baseURL: dataService,
-      headers: {}
+const requestSingle = (url, params, success = res => {}, fail = () => {}) => {
+  let _params = "data=" + JSON.stringify(params);
+  return axios
+    .post(url, _params)
+    .then(_res => {
+      success(_res);
+    })
+    .catch(err => {
+      fail();
     });
-    inxtanceOfUplodafile = axios.create({
-      baseURL: dataService,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    });
-    axiosinsArr.push({
-      instanceOfRequest,
-      inxtanceOfUplodafile
-    });
-  } else {
-    instanceOfRequest = axios.create({
-      baseURL: dataService.dataService,
-      headers: {}
-    });
-    inxtanceOfUplodafile = axios.create({
-      baseURL: dataService.dataService,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    });
-    requestArgument.token = dataService.token ? dataService.token : null;
-    requestArgument.orgcode = dataService.orgcode ? dataService.orgcode : null;
-  }
-
-  axiosinsArr.push({
-    instanceOfRequest,
-    inxtanceOfUplodafile
-  });
-  requestArr.push({
-    ind: index++,
-    fetch: function(me, pr, scb, fcb = () => {}) {
-      if (!me) {
-        throw new Error("请求数据需要指定方法，参数method不能为空");
-      } else {
-        let thisIns = axiosinsArr[this.ind].instanceOfRequest;
-        let params = {
-          ...requestArgument,
-          data: JSON.stringify({ ...pr })
-        };
-        let resPromise = thisIns.post(me, params);
-        if (typeof scb === "function") {
-          resPromise.then(Response => {
-            scb(Response.data);
-          });
-        }
-        resPromise.catch(fcb);
-        return resPromise;
-      }
-    },
-    uploadFile: (me, pr, scb, prog = () => {}, fbc = () => {}) => {
-      if (!me) {
-        throw new Error("请求数据需要指定方法，参数method不能为空");
-      } else {
-        let thisIns = axiosinsArr[this.ind].inxtanceOfUplodafile;
-        let formDataObj = new FormData();
-        for (let key in requestArgument) {
-          formDataObj.append(key, requestArgument[key]);
-        }
-        for (let key in pr) {
-          if (key == "file" || key == "files") {
-            continue;
-          }
-          formDataObj.append(key, requestArgument[key]);
-        }
-        //file arr
-        if (typeof pr.files === "object") {
-          for (let file of files) {
-            formDataObj.append("files", file);
-          }
-        } else {
-          formDataObj.append("files", files);
-        }
-
-        let config = {
-          onUploadProgress: progressEvent => {
-            let v = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
-            prog(v);
-          }
-        };
-
-        let resPromise = thisIns.post(me, formDataObj, config);
-        if (typeof scb === "function") {
-          resPromise.then(Response => {
-            scb(Response.data);
-          });
-        }
-        resPromise.catch(fcb);
-        return resPromise;
-      }
-    }
-  });
 };
 
-const request = requestArr;
-export { setConfig, request };
+export default {
+  request,
+  requestMultiple,
+  setConfig,
+  requestSingle
+};

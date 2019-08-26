@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-04-17 13:26:48
+ * @Last Modified time: 2019-08-26 14:39:34
  */
 
 /**
@@ -24,25 +24,36 @@ let option = {
   cwd: process.cwd(),
   stdio: "inherit",
   encoding: "utf8",
-  shell: process.platform == "win32",
-  // killSignal:"quit sign",
-  timeout: 5000,
-  detached: false
+  shell: process.platform == "win32"
 };
 
-const start = spawn("npx", ["react-app-rewired", "build"], {
+spawn.sync("npx", ["react-app-rewired", "build"], {
   ...option
 });
 
-start.on("error", err => {
-  console.log("无法启动脚手架进程", err);
-});
+// start.on("error", err => {
+//   console.log("无法启动脚手架进程", err);
+// });
 
-start.on("close", (code, signal) => {
-  if (code == 0 && !signal) {
-    zipper.sync
-      .zip("./build")
-      .compress()
-      .save("build.zip");
-  }
-});
+// start.on("close", (code, signal) => {
+//   if (code == 0 && !signal) {
+//     zipper.sync
+//       .zip("./build")
+//       .compress()
+//       .save("build.zip");
+//   }
+// });
+
+let hash = "";
+for (let i = 0; i < 10; i++) {
+  hash += Math.floor(Math.random() * 16).toString(16);
+}
+
+let zipName = `build.${hash}.zip`;
+
+// zipper.sync
+//   .zip("./build")
+//   .compress()
+//   .save(zipName);
+
+console.log("打包压缩完成：", zipName);
