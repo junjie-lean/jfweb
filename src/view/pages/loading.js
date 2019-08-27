@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-07 15:51:16
+ * @Last Modified time: 2019-08-27 14:56:44
  */
 
 /**
@@ -25,7 +25,15 @@ export default class Loading extends React.Component {
       //基于新路由规范的loading跳转逻辑
       let rt = JSON.parse(U.getQueryString("rt").slice(1, -1));
       setTimeout(() => {
-        _this.props.history.push(rt.p);
+        if (rt.p) {
+          _this.props.history.push(rt.p);
+        } else {
+          _this.props.history.push("/");
+        }
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        _this.props.history.push("/");
       }, 3000);
     }
   }

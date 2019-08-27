@@ -2,11 +2,12 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 16:46:12
+ * @Last Modified time: 2019-08-27 15:54:11
  */
 
 /**
  * @description webpack配置override
+ * @writable writable
  */
 
 /*
@@ -69,9 +70,13 @@ const setWebpack = () => (config, env) => {
   let _config = {
     ...config,
     devtool: process.env.NODE_ENV == "production" ? false : "source-map",
+    entry: {
+      app: "./src/index.js"
+    },
     output: {
       path: path.resolve(__dirname, "build"),
-      filename: "js/jfWeb.bundle.js"
+      publicPath:"/",
+      filename: "static/js/jfWeb.bundle.js"
     }
   };
   return _config;
@@ -96,6 +101,15 @@ const urlLoader = {
   // use: "file-loader"
 };
 
+const babelLoader = {
+  exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.s?css$/i],
+  use: {
+    loader: require.resolve("babel-loader"),
+    options: {
+      name: "static/media/[name].[hash:8].[ext]"
+    }
+  }
+};
 const fileLoader = {
   // exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.s?css$/],
   // loader: require.resolve("file-loader"),
@@ -165,6 +179,8 @@ module.exports = override(
   // addWebpackModuleRule(fileLoader), //添加file-loader配置
 
   // addWebpackModuleRule(cssLoader), //添加css-loader配置
+
+  // addWebpackModuleRule(babelLoader), //添加babel-loader配置
 
   _fixBabelImports(), //动态引入插件
 

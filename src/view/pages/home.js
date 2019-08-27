@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 17:34:14
+ * @Last Modified time: 2019-08-27 14:31:41
  */
 
 import React from "react";
@@ -58,6 +58,9 @@ export default class Home extends React.Component {
     message.success(`当前框架等级为：${version}`);
   }
 
+  jumpto() {
+    this.props.history.push("/des");
+  }
   render() {
     return (
       <>
@@ -77,9 +80,12 @@ export default class Home extends React.Component {
           >
             Ant Design支持
           </Button>
+          <Button type="primary" onClick={this.jumpto.bind(this)}>
+            React-Router支持
+          </Button>
           <hr />
           <p>{txt}</p>
-          {/* <video src={VIDEO} autoPlay controls /> */}
+          <video src={VIDEO} autoPlay controls />
         </div>
       </>
     );
