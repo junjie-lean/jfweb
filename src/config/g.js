@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:54:03
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-05 17:27:32
+ * @Last Modified time: 2019-08-28 14:47:33
  */
 
 /**
@@ -10,9 +10,8 @@
  */
 
 import lang from "./../lang/zh_CN";
-// const sKey = require("./../../package").config.defaultSKey;
-const sKey = "";
 
+let sKey = require("./../../package").config.defaultSKey;
 let isDev = process.env.NODE_ENV === "development" ? true : false;
 
 const baseConfig = {
