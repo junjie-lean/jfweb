@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 16:17:19
+ * @Last Modified time: 2019-08-28 10:01:17
  */
 
 import React from "react";
@@ -20,8 +20,8 @@ import { Button, message } from "antd";
 
 import { getXXXData_action } from "../../redux/home.reducers";
 
-// import PNGR from "./../../media/picture/loading.gif";
-import PNGR from "./../../media/picture/ava.png";
+import PNGR from "./../../media/picture/loading.gif";
+// import PNGR from "./../../media/picture/ava.png";
 import txt from "!!raw-loader!./../../config/example.txt";
 import SVG from "./../public/svg";
 import VIDEO from "./../../media/video/thatGirl.mp4";
@@ -73,6 +73,7 @@ export default class Home extends React.Component {
           <div style={{ position: "absolute", top: 4, right: 4, width: 30 }}>
             <img style={{ width: "100%" }} src={PNGR} alt="图片加载失败" />
           </div>
+
           <br />
           <Button
             type="primary"
@@ -80,12 +81,14 @@ export default class Home extends React.Component {
           >
             Ant Design支持
           </Button>
+          <br />
+          <br />
           <Button type="primary" onClick={this.jumpto.bind(this)}>
             React-Router支持
           </Button>
           <hr />
-          <p>{txt}</p>
-          <video src={VIDEO} autoPlay controls />
+          {/* <p>{txt}</p> */}
+          {/* <video src={VIDEO} autoPlay controls /> */}
         </div>
       </>
     );
