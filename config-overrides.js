@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 15:54:11
+ * @Last Modified time: 2019-08-27 17:15:11
  */
 
 /**
@@ -75,8 +75,8 @@ const setWebpack = () => (config, env) => {
     },
     output: {
       path: path.resolve(__dirname, "build"),
-      publicPath:"/",
-      filename: "static/js/jfWeb.bundle.js"
+      publicPath: "/",
+      filename: "static/js/index.js"
     }
   };
   return _config;

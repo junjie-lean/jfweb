@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 14:31:41
+ * @Last Modified time: 2019-08-27 16:17:19
  */
 
 import React from "react";
@@ -40,7 +40,7 @@ export default class Home extends React.Component {
   componentDidMount() {
     //ie 兼容测试
     const foo = () => {
-      // getXXXData_action();
+      getXXXData_action();
       [1, 2, 3].map(item => {});
     };
     foo();
