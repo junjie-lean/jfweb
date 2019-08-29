@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-17 13:30:36
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-06 13:56:42
+ * @Last Modified time: 2019-08-29 14:36:00
  */
 
 /**
@@ -32,13 +32,13 @@ let index = 0;
  * @description 参数可以为包含数据服务属性/token/orgcode的对象,也可以仅是数据服务地址
  */
 const setConfig = dataService => {
-  let instanceOfRequest, inxtanceOfUplodafile;
+  let instanceOfRequest, inxtanceOfUploadfile;
   if (typeof dataService === "string") {
     instanceOfRequest = axios.create({
       baseURL: dataService,
       headers: {}
     });
-    inxtanceOfUplodafile = axios.create({
+    inxtanceOfUploadfile = axios.create({
       baseURL: dataService,
       headers: {
         "Content-Type": "multipart/form-data"
@@ -46,14 +46,14 @@ const setConfig = dataService => {
     });
     axiosinsArr.push({
       instanceOfRequest,
-      inxtanceOfUplodafile
+      inxtanceOfUploadfile
     });
   } else {
     instanceOfRequest = axios.create({
       baseURL: dataService.dataService,
       headers: {}
     });
-    inxtanceOfUplodafile = axios.create({
+    inxtanceOfUploadfile = axios.create({
       baseURL: dataService.dataService,
       headers: {
         "Content-Type": "multipart/form-data"
@@ -65,7 +65,7 @@ const setConfig = dataService => {
 
   axiosinsArr.push({
     instanceOfRequest,
-    inxtanceOfUplodafile
+    inxtanceOfUploadfile
   });
   requestArr.push({
     ind: index++,
@@ -92,7 +92,7 @@ const setConfig = dataService => {
       if (!me) {
         throw new Error("请求数据需要指定方法，参数method不能为空");
       } else {
-        let thisIns = axiosinsArr[this.ind].inxtanceOfUplodafile;
+        let thisIns = axiosinsArr[this.ind].inxtanceOfUploadfile;
         let formDataObj = new FormData();
         for (let key in requestArgument) {
           formDataObj.append(key, requestArgument[key]);

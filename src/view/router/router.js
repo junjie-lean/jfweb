@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:53:28
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 14:56:51
+ * @Last Modified time: 2019-08-29 13:47:31
  */
 
 /**
@@ -20,7 +20,12 @@ import {
 import Loading from "../pages/loading";
 import Home from "../pages/home";
 import DesRouter from "./desRouter";
+
 export default class RouterRelation extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Router basename="/">

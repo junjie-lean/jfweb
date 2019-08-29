@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 17:15:11
+ * @Last Modified time: 2019-08-29 13:58:37
  */
 
 /**
@@ -41,8 +41,9 @@
 */
 
 const path = require("path");
-const autoprefixer = require("autoprefixer");
-const rewireSVGLoader = require("react-app-rewire-svg-react-loader");
+
+// const autoprefixer = require("autoprefixer");
+// const rewireSVGLoader = require("react-app-rewire-svg-react-loader");
 
 const {
   override,

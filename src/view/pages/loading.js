@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 14:56:44
+ * @Last Modified time: 2019-08-29 15:05:41
  */
 
 /**
@@ -11,32 +11,51 @@
 
 import React from "react";
 import ReactLoding from "react-loading";
+import { withRouter,Prompt } from "react-router-dom";
 import G from "./../../config/g";
 import U from "./../../util/_util";
 
+@withRouter
 export default class Loading extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  listenRouter() {
+    let { listen, block } = this.props.history;
+    listen((location, action) => {
+      console.log(
+        `The current URL is ${location.pathname}${location.search}${location.hash}`
+      );
+    });
+  }
+
   componentDidMount() {
+    console.log(this.props)
+    this.listenRouter();
     let _this = this;
     if (window.location.href.indexOf("rt") > -1) {
-      //基于新路由规范的loading跳转逻辑
-      let rt = JSON.parse(U.getQueryString("rt").slice(1, -1));
-      setTimeout(() => {
-        if (rt.p) {
-          _this.props.history.push(rt.p);
-        } else {
-          _this.props.history.push("/");
-        }
-      }, 3000);
+      //http://localhost:4000/loading?otherParams=1&orgcode=1&token=2&rt=%27{%22p%22:{%22a%22:1,%22b%22:2},%22t%22:%22/des/two/%22}%27
+
+      let rt = U.getQueryString("rt");
+      if (rt) {
+        let rtObject = JSON.parse(rt.slice(1, -1)); //需要把字符串中一前一后的单引号去掉后才能json.parse出来
+        
+        setTimeout(() => {
+          _this.props.history.push("/des/two");
+          // _this.props.history.block('我要跳转到其他网页去')
+        }, 5000);
+      }
     } else {
+      //如果没有需要带参跳转
+      //初始化跳转
       setTimeout(() => {
         _this.props.history.push("/");
       }, 3000);
     }
   }
+
   render() {
     let types = [
       "blank",

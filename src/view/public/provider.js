@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-27 16:28:20
+ * @Last Modified time: 2019-08-29 13:48:07
  */
 
 /**
@@ -59,6 +59,10 @@ const store = createStore(allReducers);
 }
 
 export default class APP extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
     return (
       <ConfigProvider locale={zhCN}>
