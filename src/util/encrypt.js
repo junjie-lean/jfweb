@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-05 11:06:33
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 13:56:21
+ * @Last Modified time: 2019-08-30 14:40:22
  */
 
 /**
@@ -15,11 +15,11 @@ const encryptionAlgorithm = "aes-128-cbc";
 let sKey = "";
 
 //是否使用package.json中的默认秘钥
-export const setSecretKey = (
-  isUseCustomerSecretKey,
-  _constomerSKey = "0000000000000000"
-) => {
-  if (isUseCustomerSecretKey) {
+export const setSecretKey = _constomerSKey => {
+  if(_constomerSKey.toString().length != 16){
+    
+  }
+  if (_constomerSKey) {
     sKey = _constomerSKey;
   } else {
     sKey = require("./../../package").config.defaultSKey;
