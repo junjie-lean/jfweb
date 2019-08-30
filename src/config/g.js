@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:54:03
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-28 14:47:33
+ * @Last Modified time: 2019-08-30 11:14:01
  */
 
 /**
@@ -16,7 +16,7 @@ let isDev = process.env.NODE_ENV === "development" ? true : false;
 
 const baseConfig = {
   systeamTitle: lang.systeam.systeamTitle /** */,
-  sKey: sKey || "0000000000000000"
+  sKey: sKey
 };
 
 /**
