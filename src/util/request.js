@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 14:25:19
+ * @Last Modified time: 2019-08-30 14:11:29
  */
 
 /**
@@ -27,7 +27,7 @@ let requestConfig = {
  * @param {String} method 请求的方法
  * @param {JSON} params 提交参数
  */
-const request = (method, params, success, fail, isBlob) => {
+export const request = (method, params, success, fail, isBlob) => {
   let opts = requestConfig;
   if (!opts.dataService) {
     throw new Error("需要设置数据服务地址，请执行setConfig进行设置");
@@ -86,7 +86,7 @@ const request = (method, params, success, fail, isBlob) => {
  * @description 同时进行多个请求，全部完成时执行回调
  * @param {Array} requestList 请求列表[{method:'',params:{}}...]
  */
-const requestMultiple = (requestList, success, fail) => {
+export const requestMultiple = (requestList, success, fail) => {
   let reqlist, axiosobj;
   requestList = requestList || [];
   if (requestList.length === 0) {
@@ -117,7 +117,7 @@ const requestMultiple = (requestList, success, fail) => {
  * @description 设置数据服务配置
  * @param {String} dataService 数据服务地址
  */
-const setConfig = (dataService, token, orgcode) => {
+export const setConfig = (dataService, token, orgcode) => {
   dataService = dataService || "/";
   if (!_.endsWith(dataService, "/")) {
     dataService = dataService + "/";
@@ -138,7 +138,12 @@ const setConfig = (dataService, token, orgcode) => {
  * @param { Function } success
  * @param { Function } fail
  */
-const requestSingle = (url, params, success = res => {}, fail = () => {}) => {
+export const requestSingle = (
+  url,
+  params,
+  success = res => {},
+  fail = () => {}
+) => {
   let _params = "data=" + JSON.stringify(params);
   return axios
     .post(url, _params)
@@ -148,11 +153,4 @@ const requestSingle = (url, params, success = res => {}, fail = () => {}) => {
     .catch(err => {
       fail();
     });
-};
-
-export default {
-  request,
-  requestMultiple,
-  setConfig,
-  requestSingle
 };

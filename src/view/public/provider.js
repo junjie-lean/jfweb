@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 13:27:10
+ * @Last Modified time: 2019-08-30 14:11:53
  */
 
 /**
@@ -16,9 +16,9 @@ import RouterRelation from "../router/router";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import allReducers from "../../redux/index.reducers";
-import request from "./../../util/request";
+import { setConfig } from "./../../util/request";
 import { setWSConfig, request as requestWS } from "./../../util/request-ws.js";
-import { setSercetKey } from "./../../util/encrypt";
+import { setSecretKey } from "./../../util/encrypt";
 
 let store;
 
@@ -26,12 +26,9 @@ let store;
   /**
    * @description 数据服务初始化
    */
-  const setConfig = request.setConfig;
-  // setConfig("http://10.10.1.156:1612/", "token", "orgcode");
   setConfig("http://10.10.1.232:1612", "token", "orgcode");
   setWSConfig("ws://10.10.1.30:3000", "token", "orgcode");
-
-  // setWSConfig("http://10.10.1.30:3000");
+  setSecretKey();
 }
 
 {
@@ -78,9 +75,11 @@ export default class APP extends React.Component {
     requestWS("/getData", { a: 1 }, data => {
       console.log(data);
     });
-    requestWS("/getUser", { name: "lean" }, data => {
-      console.log(data);
+
+    requestWS("/getUser", { name: "lean" }).then(res => {
+      console.log("this is .then fun", res);
     });
+    console.log("111");
   }
 
   render() {

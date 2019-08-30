@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 13:48:01
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 13:46:43
+ * @Last Modified time: 2019-08-30 13:56:20
  */
 
 /**
@@ -23,6 +23,7 @@ if (connect_start_digit % 2 == 1) {
 
 export const setWSConfig = (serverAddr, token, orgcode) => {
   let initialWSObjectFail = "初始化ws实例方法失败，原因：";
+  
   if (!window["WebSocket"]) {
     throw new Error(initialWSObjectFail + "当前环境不支持webSocket功能!");
   }
@@ -47,7 +48,9 @@ export const setWSConfig = (serverAddr, token, orgcode) => {
   if (!requestWSinit.isReady) {
     requestWSinit = {
       socket: io(serverAddr),
-      isReady: true
+      isReady: true,
+      token,
+      orgcode
     };
   }
   openSocket();
@@ -90,7 +93,7 @@ export const request = (methods, params, scb, fcb) => {
   let msgType = typeCheck(params);
   if (msgType !== "object") {
     throw new Error(
-      "不能识别参数类型，参数只能是对象,但是当前类型为:",
+      "不能识别参数类型，参数只能是对象,但是当前参数类型为:",
       msgType
     );
   }
@@ -99,9 +102,10 @@ export const request = (methods, params, scb, fcb) => {
   params = {
     ...params,
     methods,
+    token: requestWSinit.token,
+    orgcode: requestWSinit.orgcode,
     currentConnectionDigit
   };
-  let sendMessageString = JSON.stringify(params);
   requestWSinit.socket.emit(methods, params);
   return new Promise((resolve, reject) => {
     requestWSinit.socket.on(methods, data => {
