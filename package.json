@@ -1,6 +1,6 @@
 {
   "name": "jf-web-app",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "基于cra二次封装的react框架",
   "homepage": ".",
