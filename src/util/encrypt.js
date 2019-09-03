@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-05 11:06:33
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 14:40:22
+ * @Last Modified time: 2019-08-30 15:11:39
  */
 
 /**
@@ -16,11 +16,14 @@ let sKey = "";
 
 //是否使用package.json中的默认秘钥
 export const setSecretKey = _constomerSKey => {
-  if(_constomerSKey.toString().length != 16){
-    
-  }
   if (_constomerSKey) {
-    sKey = _constomerSKey;
+    if (_constomerSKey.toString().length != 16) {
+      throw new Error(
+        "加密方式初始化失败，原因是加密秘钥只能是长度为16位的字符串"
+      );
+    } else {
+      sKey = _constomerSKey;
+    }
   } else {
     sKey = require("./../../package").config.defaultSKey;
   }

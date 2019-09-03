@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 14:11:53
+ * @Last Modified time: 2019-09-02 09:23:37
  */
 
 /**
@@ -27,7 +27,7 @@ let store;
    * @description 数据服务初始化
    */
   setConfig("http://10.10.1.232:1612", "token", "orgcode");
-  setWSConfig("ws://10.10.1.30:3000", "token", "orgcode");
+  // setWSConfig("ws://10.10.1.30:3000", "token", "orgcode");
   setSecretKey();
 }
 
@@ -71,16 +71,7 @@ export default class APP extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    requestWS("/getData", { a: 1 }, data => {
-      console.log(data);
-    });
-
-    requestWS("/getUser", { name: "lean" }).then(res => {
-      console.log("this is .then fun", res);
-    });
-    console.log("111");
-  }
+  componentDidMount() {}
 
   render() {
     return (

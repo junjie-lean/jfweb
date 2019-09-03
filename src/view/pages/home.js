@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-29 10:21:02
+ * @Last Modified time: 2019-09-02 16:35:01
  */
 
 import React from "react";
@@ -24,6 +24,8 @@ import PNGR from "./../../media/picture/loading.gif";
 // import PNGR from "./../../media/picture/ava.png";
 import txt from "!!raw-loader!./../../config/example.txt";
 import SVG from "./../public/svg";
+// import ADD from './../../media/svg/SVG/add.svg';
+
 import VIDEO from "./../../media/video/thatGirl.mp4";
 @connect(
   state => state,
@@ -87,7 +89,7 @@ export default class Home extends React.Component {
             React-Router支持
           </Button>
           <hr />
-          {/* <p>{txt}</p> */}
+          <p>{txt}</p>
           {/* <video src={VIDEO} autoPlay controls /> */}
         </div>
       </>

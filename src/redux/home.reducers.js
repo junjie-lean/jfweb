@@ -2,26 +2,49 @@
  * @Author: junjie.lean
  * @Date: 2019-08-23 13:28:06
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-23 14:20:47
+ * @Last Modified time: 2019-09-02 16:35:01
  */
 
 /**
  * @description reducer示例
  */
 
-import { getData } from "../request/home.request";
+import { getData, getUser } from "../request/home.request";
 
 let init = {};
 
-export const getXXXData_action = async () => {
-  let data = await getData();
-  return dispatch => {
-    dispatch({
-      type: "GETXXXDATA",
-      data
-    });
-  };
+export const getXXXData_action = async (bbb) => {
+  let data;
+  if(bbb==1){
+    data = await getData()
+  }else{
+    data =await getUser();
+  }
+
+ 
+  //data = sdadasdasasdasdasd
+   
+  if(data.result == 'ok'){
+    return dispatch => {
+      dispatch({
+        type: "GETXXXDATA",
+        data
+      });
+    };
+  }
+  else{
+    return dispatch => {
+      dispatch({
+        type: "GETXXXDATA",
+        data
+      });
+    };
+  }
 };
+
+
+
+
 
 export const getXXXData_reducer = (state = init, action) => {
   switch (action.type) {

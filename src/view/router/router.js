@@ -33,7 +33,7 @@ export default class RouterRelation extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route path="/loading" component={Loading} />
-          <Route path="/des" component={DesRouter} />
+          <Route path="/des/:id" component={DesRouter} />
           <Redirect to="/loading" />
         </Switch>
       </Router>

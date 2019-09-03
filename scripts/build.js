@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-26 14:39:34
+ * @Last Modified time: 2019-09-02 10:27:09
  */
 
 /**
@@ -51,9 +51,9 @@ for (let i = 0; i < 10; i++) {
 
 let zipName = `build.${hash}.zip`;
 
-// zipper.sync
-//   .zip("./build")
-//   .compress()
-//   .save(zipName);
+zipper.sync
+  .zip("./build")
+  .compress()
+  .save(zipName);
 
 console.log("打包压缩完成：", zipName);
