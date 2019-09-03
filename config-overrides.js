@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-29 13:58:37
+ * @Last Modified time: 2019-09-03 14:10:39
  */
 
 /**
@@ -158,12 +158,15 @@ const cssLoader = {
   ]
 };
 
-const _fixBabelImports = () => {
-  return fixBabelImports("import", {
-    libraryName: "antd",
-    libraryDirectory: "es",
+const _fixBabelImports = libName => {
+  let info = {
+    libraryName: libName,
     style: "css"
-  });
+  };
+  if (libName == "antd") {
+    info.libraryDirectory = "es";
+  }
+  return fixBabelImports("import", info);
 };
 
 module.exports = override(
@@ -183,7 +186,9 @@ module.exports = override(
 
   // addWebpackModuleRule(babelLoader), //添加babel-loader配置
 
-  _fixBabelImports(), //动态引入插件
+  _fixBabelImports("antd"), //动态引入antd插件
+
+  _fixBabelImports("antd-mobile"), //动态引入antd-mobile插件
 
   addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
 
