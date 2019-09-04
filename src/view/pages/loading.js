@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-29 15:05:41
+ * @Last Modified time: 2019-09-04 13:31:08
  */
 
 /**
@@ -11,7 +11,7 @@
 
 import React from "react";
 import ReactLoding from "react-loading";
-import { withRouter,Prompt } from "react-router-dom";
+import { withRouter, Prompt } from "react-router-dom";
 import G from "./../../config/g";
 import U from "./../../util/_util";
 
@@ -26,26 +26,23 @@ export default class Loading extends React.Component {
     let { listen, block } = this.props.history;
     listen((location, action) => {
       console.log(
-        `The current URL is ${location.pathname}${location.search}${location.hash}`
+        // `The current URL is ${location.pathname}${location.search}${location.hash}`
       );
     });
   }
 
   componentDidMount() {
-    console.log(this.props)
+    // console.log(this.props);
     this.listenRouter();
     let _this = this;
     if (window.location.href.indexOf("rt") > -1) {
       //http://localhost:4000/loading?otherParams=1&orgcode=1&token=2&rt=%27{%22p%22:{%22a%22:1,%22b%22:2},%22t%22:%22/des/two/%22}%27
-
       let rt = U.getQueryString("rt");
       if (rt) {
         let rtObject = JSON.parse(rt.slice(1, -1)); //需要把字符串中一前一后的单引号去掉后才能json.parse出来
-        
         setTimeout(() => {
-          _this.props.history.push("/des/two");
-          // _this.props.history.block('我要跳转到其他网页去')
-        }, 5000);
+          // _this.props.history.push("/des/two");
+        }, 10000);
       }
     } else {
       //如果没有需要带参跳转
@@ -82,15 +79,15 @@ export default class Loading extends React.Component {
         >
           <div style={{ margin: "100px 100px" }}>
             <span style={{ color: "#fff", margin: "0 0 30px" }}>
-              {G.systeamTitle}
+              {G.systeamTitle} v{require("./../../../package").version}  123
             </span>
-            <ReactLoding type={"bars"} color="#fff" />
+            <ReactLoding type={"bars"} color="#c0c0c0" />
           </div>
           <div
             style={{
               position: "fixed",
               bottom: 20,
-              right: 50
+              right: 62
             }}
           >
             <ReactLoding

@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-30 14:11:29
+ * @Last Modified time: 2019-09-04 13:14:04
  */
 
 /**
@@ -10,6 +10,7 @@
  */
 
 import axios from "axios";
+import _ from "lodash";
 
 /**
  * 数据请求相关配置

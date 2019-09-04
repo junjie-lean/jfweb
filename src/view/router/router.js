@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 15:53:28
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-29 13:47:31
+ * @Last Modified time: 2019-09-03 15:40:20
  */
 
 /**
@@ -30,7 +30,7 @@ export default class RouterRelation extends React.Component {
     return (
       <Router basename="/">
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Loading} />
           <Route exact path="/home" component={Home} />
           <Route path="/loading" component={Loading} />
           <Route path="/des/:id" component={DesRouter} />
