@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-04 13:31:08
+ * @Last Modified time: 2019-09-04 15:29:27
  */
 
 /**
@@ -79,7 +79,7 @@ export default class Loading extends React.Component {
         >
           <div style={{ margin: "100px 100px" }}>
             <span style={{ color: "#fff", margin: "0 0 30px" }}>
-              {G.systeamTitle} v{require("./../../../package").version}  123
+              {G.systeamTitle} v{require("./../../../package").version} 
             </span>
             <ReactLoding type={"bars"} color="#c0c0c0" />
           </div>

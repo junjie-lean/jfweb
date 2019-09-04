@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-04 13:58:08
+ * @Last Modified time: 2019-09-04 15:03:48
  */
 
 /**
@@ -88,7 +88,6 @@ const setWebpack = () => (config, env) => {
 };
 
 const setWebpackDevServer = () => config => {
-  console.log(123123123123123123);
   return {
     ...config,
     watchContentBase: true,
