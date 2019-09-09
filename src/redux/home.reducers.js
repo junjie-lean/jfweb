@@ -2,16 +2,44 @@
  * @Author: junjie.lean
  * @Date: 2019-08-23 13:28:06
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-06 17:25:25
+ * @Last Modified time: 2019-09-09 14:44:12
  */
 
 /**
  * @description reducer示例
  */
 
-import { getData } from "../request/home.request";
+import { getData } from "../request.unset/home.request";
 
 let init = {};
+
+//action
+export const test_ac =  c => {
+  console.log("action:", c);
+  return dispatch => {
+    console.log("dispatch:", c);
+    dispatch({
+      type: "test",
+      data: c
+    });
+  };
+};
+
+export const test_reducer = (state = init, action) => {
+  switch (action.type) {
+    case "test": {
+      return {
+        ...state,
+        count: action.data
+      };
+    }
+    default: {
+      return {
+        ...state
+      };
+    }
+  }
+};
 
 export const getXXXData_action = async () => {
   let data = await getData();
@@ -48,4 +76,5 @@ export const getXXXData_reducer = (state = init, action) => {
     }
   }
 };
+
 // export { getXXXData_action, getXXXData_reducer };

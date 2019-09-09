@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-06 17:24:44
+ * @Last Modified time: 2019-09-09 11:08:14
  */
 
 import React from "react";
@@ -18,7 +18,7 @@ import "./../../style/home.scss";
 import { connect } from "react-redux";
 import { Button, message } from "antd";
 
-import { getXXXData_action } from "../../redux/home.reducers";
+import { getXXXData_action, test_ac } from "../../redux/home.reducers";
 
 import PNGR from "./../../media/picture/loading.gif";
 // import PNGR from "./../../media/picture/ava.png";
@@ -27,9 +27,12 @@ import SVG from "./../public/svg";
 // import ADD from './../../media/svg/SVG/add.svg';
 
 import VIDEO from "./../../media/video/thatGirl.mp4";
+
+let a = 0;
+
 @connect(
   state => state,
-  { getXXXData_action }
+  { getXXXData_action, test_ac }
 )
 export default class Home extends React.Component {
   constructor(props) {
@@ -41,17 +44,18 @@ export default class Home extends React.Component {
   }
   componentDidMount() {
     getXXXData_action();
-    
+
     //ie 兼容测试
     // const foo = () => {
-      // [1, 2, 3].map(item => {});
+    // [1, 2, 3].map(item => {});
     // };
     // foo();
   }
 
   //不再推荐使用componentWillReceiveProps
   static getDerivedStateFromProps(nextPorps, prevState) {
-    console.log("props 刷新：", nextPorps);
+    // console.log("props 刷新：", nextPorps);
+    console.log("reducer:", nextPorps.test_reducer.count);
     return {
       ...prevState
     };
@@ -59,6 +63,8 @@ export default class Home extends React.Component {
 
   clickHandle(version) {
     message.success(`当前框架等级为：${version}`);
+    this.props.test_ac(++a);
+    // test_ac(++a);
   }
 
   jumpto() {

@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-06 17:13:31
+ * @Last Modified time: 2019-09-09 14:55:23
  */
 
 /**
@@ -13,8 +13,10 @@ import React from "react";
 import { ConfigProvider, message } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import RouterRelation from "../router/router";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+// import promiseMiddleware from "redux-promise";
 import allReducers from "../../redux/index.reducers";
 import { setConfig } from "./../../util/request";
 import { setWSConfig, request as requestWS } from "./../../util/request-ws.js";
@@ -36,7 +38,7 @@ let store;
   /**
    * @description reducers合并，并创建store和router:
    */
-  store = createStore(allReducers);
+  store = createStore(allReducers, applyMiddleware(thunk));
 }
 
 {
