@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-06 14:21:02
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-04 13:14:04
+ * @Last Modified time: 2019-09-06 17:22:32
  */
 
 /**
@@ -58,6 +58,7 @@ export const request = (method, params, success, fail, isBlob) => {
     ajaxObj
       .then(response => {
         if (typeof success === "function") {
+          // console.log("______scb", response.data);
           success(response.data);
         } else {
           console.log(response.data);

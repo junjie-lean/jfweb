@@ -2,37 +2,28 @@
  * @Author: junjie.lean
  * @Date: 2019-08-23 13:28:06
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-02 16:35:01
+ * @Last Modified time: 2019-09-06 17:25:25
  */
 
 /**
  * @description reducer示例
  */
 
-import { getData, getUser } from "../request/home.request";
+import { getData } from "../request/home.request";
 
 let init = {};
 
-export const getXXXData_action = async (bbb) => {
-  let data;
-  if(bbb==1){
-    data = await getData()
-  }else{
-    data =await getUser();
-  }
-
- 
-  //data = sdadasdasasdasdasd
-   
-  if(data.result == 'ok'){
+export const getXXXData_action = async () => {
+  let data = await getData();
+  console.log(data);
+  if (data.result == "ok") {
     return dispatch => {
       dispatch({
         type: "GETXXXDATA",
         data
       });
     };
-  }
-  else{
+  } else {
     return dispatch => {
       dispatch({
         type: "GETXXXDATA",
@@ -41,10 +32,6 @@ export const getXXXData_action = async (bbb) => {
     };
   }
 };
-
-
-
-
 
 export const getXXXData_reducer = (state = init, action) => {
   switch (action.type) {

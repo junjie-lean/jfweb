@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-07-24 14:40:12
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-02 16:35:01
+ * @Last Modified time: 2019-09-06 17:24:44
  */
 
 import React from "react";
@@ -40,12 +40,13 @@ export default class Home extends React.Component {
     };
   }
   componentDidMount() {
+    getXXXData_action();
+    
     //ie 兼容测试
-    const foo = () => {
-      // getXXXData_action();
-      [1, 2, 3].map(item => {});
-    };
-    foo();
+    // const foo = () => {
+      // [1, 2, 3].map(item => {});
+    // };
+    // foo();
   }
 
   //不再推荐使用componentWillReceiveProps

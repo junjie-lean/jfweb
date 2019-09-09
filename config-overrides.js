@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-04 15:03:48
+ * @Last Modified time: 2019-09-06 14:06:52
  */
 
 /**
@@ -73,7 +73,7 @@ const setWebpack = () => (config, env) => {
     process.env.NODE_ENV == "production" ? "production" : "development";
   let _config = {
     ...config,
-    devtool: process.env.NODE_ENV == "production" ? false : "source-map",
+    devtool: process.env.NODE_ENV == "production" ? false : "inline-source-map",
     entry: {
       app: "./src/index.js"
     },
@@ -83,7 +83,7 @@ const setWebpack = () => (config, env) => {
       filename: "static/js/index.js"
     }
   };
-
+  console.log(config.mode);
   return _config;
 };
 

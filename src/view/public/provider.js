@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-02 09:23:37
+ * @Last Modified time: 2019-09-06 17:13:31
  */
 
 /**
@@ -26,7 +26,8 @@ let store;
   /**
    * @description 数据服务初始化
    */
-  setConfig("http://10.10.1.232:1612", "token", "orgcode");
+  // setConfig("http://10.10.1.232:1612", "token", "orgcode");
+  setConfig("http://localhost:9000", "token", "orgcode");
   // setWSConfig("ws://10.10.1.30:3000", "token", "orgcode");
   setSecretKey();
 }
