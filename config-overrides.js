@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-06 14:06:52
+ * @Last Modified time: 2019-09-10 15:55:47
  */
 
 /**
@@ -79,7 +79,7 @@ const setWebpack = () => (config, env) => {
     },
     output: {
       path: path.resolve(__dirname, "build"),
-      publicPath: "/",
+      publicPath: "./",
       filename: "static/js/index.js"
     }
   };
