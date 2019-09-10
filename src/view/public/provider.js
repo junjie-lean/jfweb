@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:06:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-09 14:55:23
+ * @Last Modified time: 2019-09-10 16:35:29
  */
 
 /**
@@ -62,7 +62,7 @@ let store;
       let _console = window.console;
       for (let item in window.console) {
         window["console"][item] = () => {
-          _console("未能输出，原因是开启了生产环境反调试模式！");
+          _console.log("未能输出，原因是开启了生产环境反调试模式！");
         };
       }
     }
