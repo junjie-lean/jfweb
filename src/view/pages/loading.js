@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-06 17:15:14
+ * @Last Modified time: 2019-09-09 15:16:29
  */
 
 /**
@@ -43,14 +43,14 @@ export default class Loading extends React.Component {
       if (rt) {
         let rtObject = JSON.parse(rt.slice(1, -1)); //需要把字符串中一前一后的单引号去掉后才能json.parse出来
         setTimeout(() => {
-          _this.props.history.push("/home");
+          // _this.props.history.push("/home");
         }, 100);
       }
     } else {
       //如果没有需要带参跳转
       //初始化跳转
       setTimeout(() => {
-        _this.props.history.push("/home");
+        // _this.props.history.push("/home");
       }, 3000);
     }
   }

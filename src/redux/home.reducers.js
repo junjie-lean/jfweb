@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-08-23 13:28:06
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-09 14:44:12
+ * @Last Modified time: 2019-09-09 15:31:21
  */
 
 /**
@@ -10,19 +10,29 @@
  */
 
 import { getData } from "../request.unset/home.request";
-
+//redux-saga redux   dva
 let init = {};
 
 //action
 export const test_ac =  c => {
   console.log("action:", c);
-  return dispatch => {
-    console.log("dispatch:", c);
-    dispatch({
-      type: "test",
-      data: c
-    });
-  };
+  getData((res)=>{
+    if(res){
+      ///
+
+
+     return  dispatch =>{
+      //.......
+      }
+    }
+  })
+  // return dispatch => {
+  //   console.log("dispatch:", c);
+  //   dispatch({
+  //     type: "test",
+  //     data: c
+  //   });
+  // };
 };
 
 export const test_reducer = (state = init, action) => {
