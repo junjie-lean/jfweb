@@ -4,6 +4,17 @@
 # 
 
 
+**Version : V0.4.2**
+
+**Last Modify : 2019-09-18**
+
+### 变动：
+
+* 移除工具包中，`formatDate()`函数,如项目中有日期格式化需求，可采用`moment`依赖
+
+
+#
+
 **Version : V0.4.1**
 
 **Last Modify : 2019-09-17**
