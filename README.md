@@ -1,8 +1,8 @@
 # JF-WEB-APP使用说明
 
-**Version : V0.4.2**
+**Version : V0.4.3**
 
-**Last Modify : 2019-09-18**
+**Last Modify : 2019-09-25**
 
 ---
 

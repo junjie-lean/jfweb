@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 16:28:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-09 15:16:29
+ * @Last Modified time: 2019-09-25 14:37:22
  */
 
 /**
@@ -25,9 +25,10 @@ export default class Loading extends React.Component {
   listenRouter() {
     let { listen, block } = this.props.history;
     listen((location, action) => {
-      console.log(
+      console
+        .log
         // `The current URL is ${location.pathname}${location.search}${location.hash}`
-      );
+        ();
     });
   }
 
@@ -55,6 +56,10 @@ export default class Loading extends React.Component {
     }
   }
 
+  clickHandle = () => {
+    console.log("增加对箭头函数的支持,但是不支持");
+  };
+
   render() {
     let types = [
       "blank",
@@ -80,8 +85,11 @@ export default class Loading extends React.Component {
           }}
         >
           <div style={{ margin: "100px 100px" }}>
-            <span style={{ color: "#fff", margin: "0 0 30px" }}>
-              {G.systeamTitle} v{require("./../../../package").version}  
+            <span
+              style={{ color: "#fff", margin: "0 0 30px" }}
+              onClick={this.clickHandle}
+            >
+              {G.systeamTitle} v{require("./../../../package").version}
             </span>
             <ReactLoding type={"bars"} color="#c0c0c0" />
           </div>

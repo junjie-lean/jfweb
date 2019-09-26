@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-18 13:34:03
+ * @Last Modified time: 2019-09-25 14:34:35
  */
 
 /**
@@ -199,6 +199,7 @@ module.exports = {
     _fixBabelImports("antd"), //动态引入antd插件
     // _fixBabelImports("antd-mobile"), //动态引入antd-mobile插件
     addBabelPlugins("@babel/transform-runtime"), //添加babel-plugins配置
+    addBabelPlugins("@babel/plugin-proposal-class-properties"), //添加babel-plugins配置
     addBabelPresets("@babel/react", "@babel/env"), //添加babel-presets配置
     // addWebpackPlugin(new webpack.HotModuleReplacementPlugin()), //添加热更插件
     // rewireSVG(), //添加svg支持

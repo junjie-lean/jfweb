@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 12:59:32
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-18 13:32:15
+ * @Last Modified time: 2019-09-19 11:08:53
  */
 
 /**
@@ -336,7 +336,6 @@ export default {
   timeLength,
   formatMin,
   formatSec,
-  formatDate,
   getWeekFromMonth,
   getMonthDays,
   getWeekStart,
