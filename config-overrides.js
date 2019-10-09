@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-15 09:54:25
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-09-25 14:34:35
+ * @Last Modified time: 2019-10-09 10:22:19
  */
 
 /**
@@ -90,10 +90,20 @@ const setWebpack = () => (config, env) => {
 const setWebpackDevServer = () => config => {
   return {
     ...config,
-    watchContentBase: true,
+    // watchContentBase: true,
     hot: true,
+    open: true,
     publicPath: "/",
+    // contentBase: "./..",
+    inline: true,
+    // quiet: true,
+    // noInfo: false,
+    lazy: false,
+    // overlay: false,
+    compress: true,
+    host: "0.0.0.0",
     watchOptions: {
+      aggregateTimeout: 300,
       ignored: "/node_modules/"
     }
   };

@@ -2,7 +2,7 @@
  * @Author: junjie.lean
  * @Date: 2019-04-16 14:33:09
  * @Last Modified by: junjie.lean
- * @Last Modified time: 2019-08-05 09:34:01
+ * @Last Modified time: 2019-10-09 10:18:45
  */
 
 /**
@@ -41,5 +41,5 @@ const start = spawn("npx", ["react-app-rewired", "start"], {
 });
 
 start.on("error", err => {
-  console.log("无法启动脚手架进程", err);
+  console.log("无法启动脚手架进程:", err);
 });
